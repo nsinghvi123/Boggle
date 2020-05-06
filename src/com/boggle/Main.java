@@ -36,13 +36,13 @@ public class Main {
         else {
             actual = side;
 
-            if (row == 0 && col == 1 || row == 0 && col == 2 || row == 0 && col == 3){
+            if (row == 0){
                 actual += " Upper";
             }
-            else if (row == 0 && col == 1 || row == 0 && col == 2 || row == 0 && col == 3){
+            else if (col == 0){
                 actual += " Left";
             }
-            else if (row == 4 && col == 1 || row == 4 && col == 2 || row == 4 && col == 3){
+            else if (col == 4){
                 actual += " Right";
             }
             else {
@@ -57,34 +57,17 @@ public class Main {
     public static String explore(int row, int col, String path){
 
         //Created a 5 by 5 Char Array
-        String[][] wordArray = new String[5][5];
+
 
         //Added Char Elements
-        wordArray[0][0] = "d";
-        wordArray[0][1] = "h";
-        wordArray[0][2] = "t";
-        wordArray[0][3] = "m";
-        wordArray[0][4] = "e";
-        wordArray[1][0] = "o";
-        wordArray[1][1] = "f";
-        wordArray[1][2] = "o";
-        wordArray[1][3] = "d";
-        wordArray[1][4] = "l";
-        wordArray[2][0] = "i";
-        wordArray[2][1] = "g";
-        wordArray[2][2] = "b";
-        wordArray[2][3] = "a";
-        wordArray[2][4] = "c";
-        wordArray[3][0] = "r";
-        wordArray[3][1] = "s";
-        wordArray[3][2] = "e";
-        wordArray[3][3] = "m";
-        wordArray[3][4] = "r";
-        wordArray[4][0] = "e";
-        wordArray[4][1] = "t";
-        wordArray[4][2] = "h";
-        wordArray[4][3] = "n";
-        wordArray[4][4] = "p";
+
+        String[][] Board = {
+                {"d ", "h", "t", "m", "e"},
+                {"o ", "f", "o", "d", "l"},
+                {"i ", "g", "b", "a", "c"},
+                {"r ", "s", "e", "m", "r"},
+                {"e ", "t", "h", "n", "p"},
+        };
 
         String pos = position(row,col);
         Boolean answer = true;

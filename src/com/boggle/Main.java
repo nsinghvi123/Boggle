@@ -2,11 +2,11 @@ package com.boggle;
 
 import java.util.ArrayList;
 
-public class Main {git
+public class Main {
 
     public static void main(String[] args) {
 
-       explore(0,0, "");
+//       System.out.println(checkIsWordPrefix("do"));
 
 
     }
@@ -76,14 +76,14 @@ public class Main {git
 
             if (row == 0 && col == 0) {
 
-                path = path + wordArray[0][0];
+                path = path + Board[0][0];
 
                 for (int i = 0; i <= 1; ++i) {
 
                     for (int a = 0; a <= 1; ++a) {
 
                         if (i != 0 || a != 0) {
-                            path += wordArray[i][a];
+                            path += Board[i][a];
                             answer = checkString(path);
                             if (answer == true) {
                                 System.out.println(path);
@@ -97,14 +97,14 @@ public class Main {git
             }
             else if (row == 0 && col == 4){
 
-                path += wordArray[0][4];
+                path += Board[0][4];
 
                 for (int i = 0; i <= 1; ++i){
 
                     for (int a = 4; a >= 3; --a){
 
                         if (i != 0 && a != 4) {
-                            path += wordArray[i][a];
+                            path += Board[i][a];
                             answer = checkString(path);
                             if (answer == true) {
                                 System.out.println(path);
@@ -117,14 +117,14 @@ public class Main {git
                 }
                 }
             else if (row == 4 && col == 0){
-                path += wordArray[4][0];
+                path += Board[4][0];
 
                 for (int i = 4; i >= 3; --i){
 
                     for (int a = 0; a >= 1; ++a){
 
                         if (i != 4 && a != 0) {
-                            path += wordArray[i][a];
+                            path += Board[i][a];
                             answer = checkString(path);
                             if (answer == true) {
                                 System.out.println(path);
@@ -137,13 +137,13 @@ public class Main {git
                 }
             }
             else if (row == 4 && col == 4){
-                path += wordArray[4][4];
+                path += Board[4][4];
 
                 for (int i = 4; i >= 3; --i){
 
                     for (int a = 3; a <= 4; ++a){
                         if (i != 4 && a != 4) {
-                            path += wordArray[i][a];
+                            path += Board[i][a];
                             answer = checkString(path);
                             if (answer == true) {
                                 System.out.println(path);
@@ -158,14 +158,14 @@ public class Main {git
         }
 
         else if (pos == "middle"){
-            path += wordArray[row][col];
+            path += Board[row][col];
 
             for (int i = row - 1 ; i <= row + 1; i++){
 
                 for (int a = col - 1; a <= col + 1; a++){
 
                     if (i != row && a != col){
-                        path += wordArray[i][a];
+                        path += Board[i][a];
                         answer = checkString(path);
                         if (answer = true){
                             System.out.println(path);
@@ -177,13 +177,13 @@ public class Main {git
         }
 
         else {
-            path += wordArray[row][col];
+            path += Board[row][col];
             if (pos == "side Upper"){
 
                 for (int i = row; i <= row + 1; i++){
                     for (int a = col - 1; a <= col+1; a++){
                         if (i!= row && a!= col){
-                            path += wordArray[i][a];
+                            path += Board[i][a];
                             answer = checkString(path);
                             if (answer == true){
                                 System.out.println(path);
@@ -201,7 +201,7 @@ public class Main {git
                 for (int i = row - 1; i <= row + 1; i++){
                     for (int a = col - 1; a <= col; a++){
                         if (i!= row && a!= col){
-                            path += wordArray[i][a];
+                            path += Board[i][a];
                             answer = checkString(path);
                             if (answer == true){
                                 System.out.println(path);
@@ -220,7 +220,7 @@ public class Main {git
                 for (int i = row - 1; i <= row; i++){
                     for (int a = col - 1; a <= col+1; a++){
                         if (i!= row && a!= col){
-                            path += wordArray[i][a];
+                            path += Board[i][a];
                             answer = checkString(path);
                             if (answer == true){
                                 System.out.println(path);
@@ -238,7 +238,7 @@ public class Main {git
                 for (int i = row - 1; i <= row + 1; i++){
                     for (int a = col; a <= col+1; a++){
                         if (i!= row && a!= col){
-                            path += wordArray[i][a];
+                            path += Board[i][a];
                             answer = checkString(path);
                             if (answer == true){
                                 System.out.println(path);
@@ -286,5 +286,33 @@ public class Main {git
         }
         return choice;
     }
+
+
+    public static Boolean checkIsWord(String word){
+
+        int n = 8;
+
+        //declaring ArrayList of size n
+        ArrayList<String> fullWord = new ArrayList<String>(n);
+
+        //adding string elements to ArrayList
+        fullWord.add("dog");
+        fullWord.add("fish");
+        fullWord.add("fire");
+        fullWord.add("home");
+        fullWord.add("hoes");
+        fullWord.add("team");
+        fullWord.add("current");
+        fullWord.add("socks");
+
+        for (int i = 0; i < n; i++){
+            if (word == fullWord.get(i)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
 

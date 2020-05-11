@@ -1,45 +1,55 @@
 package com.boggle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
 
-        System.out.println(checkString("dog"));
-        System.out.println(checkString("return"));
+    public static void main(String[] args) {
+        char[][] board = {
+                {'d', 'h', 't', 'm', 'e'},
+                {'o', 'f', 'o', 'd', 'l'},
+                {'i', 'g', 'b', 'a', 'c'},
+                {'r', 's', 'e', 'm', 'r'},
+                {'e', 't', 'h', 'n', 'p'},
+        };
+
+        BoggleLetter newBogLetter = new BoggleLetter(0, 0, 'd');
+
+        explore(newBogLetter, "", board);
+
+
+
     }
 
-    public static Boolean checkString(String word) {
+    public static void explore(BoggleLetter boggleLetter, String path, char board[][]) {
+        // when i start, i explore the current letter
+        path += boggleLetter.getVal();
+        // figures out all the accessible options to the current letter
+        List<BoggleLetter> lettersToExplore = boggleLetter.adjacentLetters(board);
+        // checks if the word is a prefix
+        Boolean isPrefix = WordPrefixCalculator.checkIsWordPrefix(path);
+        // checks if the word is a full word
+        Boolean isWordFull = FullWordCalculator.checkIsWordFull(path);
 
-        //size of ArrayList
-        int n = 8;
-        String checkWord = "";
-        Boolean choice = false;
-
-        //declaring ArrayList of size n
-        ArrayList<String> stringArray = new ArrayList<String>(n);
-
-        //adding string elements to ArrayList
-        stringArray.add("dog");
-        stringArray.add("fish");
-        stringArray.add("fire");
-        stringArray.add("home");
-        stringArray.add("hoes");
-        stringArray.add("team");
-        stringArray.add("current");
-        stringArray.add("socks");
-
-        //loop to access elements of ArrayList
-        for (int i = 0; i < n; i++) {
-            checkWord = stringArray.get(i);
-
-            if (word == checkWord){
-                choice = true;
-                return true;
+        if (isWordFull){
+            System.out.println(path);
+        }
+        if (isPrefix) {
+            for (int i = 0; i < lettersToExplore.size(); i++) {
+                explore(lettersToExplore.get(i), path, board);
             }
         }
-        return choice;
     }
 }
+
+    // base case: it not a prefix, not call explore and return something
+    // 2nd case: if it is a full word, then print it out (refer to that function)
+    // 3rd case: find all the adjacent letters and call explore
+
+
+
+
+
 

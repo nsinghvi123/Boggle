@@ -26,7 +26,7 @@ public class BoggleLetter {
         return val;
     }
 
-    public List<BoggleLetter> adjacentLetters(String[][] board) {
+    public List<BoggleLetter> adjacentLetters(char[][] board) {
         List<BoggleLetter> result = new ArrayList<>();
         for (int i = row - 1; i <= row + 1; i++){
           for (int a = col - 1; a <= col + 1; a++){
@@ -38,7 +38,7 @@ public class BoggleLetter {
               result.add(new BoggleLetter(i, a, board[i][a]));
           }
         }
-        return null;
+        return result;
     }
 }
 

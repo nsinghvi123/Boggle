@@ -51,12 +51,14 @@ public class FullWordCalculator {
         word = word.toLowerCase();
         completeWord = completeWord.toLowerCase();
 
-        for (int i = 0; i < word.length(); i++){
-            if (word.charAt(i) == completeWord.charAt(i)){
-                count++;
-            }
-            if (count == completeWord.length()){
-                return true;
+        if (completeWord.length() >= word.length()){
+            for (int i = 0; i < word.length(); i++){
+                if (word.charAt(i) == completeWord.charAt(i)){
+                    count++;
+                }
+                if (count == completeWord.length()){
+                    return true;
+                }
             }
         }
         return false;

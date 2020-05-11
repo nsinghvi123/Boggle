@@ -37,14 +37,18 @@ public class WordPrefixCalculator {
 
     private static boolean checkWordHasPrefix(String prefix, String fullWord) {
         int count = 0;
-        for (int a = 0; a < prefix.length(); a++){
-            if (prefix.charAt(a) == fullWord.charAt(a)){
-                count++;
+        if (fullWord.length() >= prefix.length()){
+            for (int a = 0; a < prefix.length(); a++){
+                if (prefix.charAt(a) == fullWord.charAt(a)){
+                    count++;
+                }
+                if (count == prefix.length()){
+                    return true;
+                }
             }
-            if (count == prefix.length()){
-                return true;
-            }
+
         }
+
         return false;
     }
 }

@@ -15,9 +15,17 @@ public class Main {
                 {'e', 't', 'h', 'n', 'p'},
         };
 
-        BoggleLetter newBogLetter = new BoggleLetter(0, 0, 'd');
 
-        explore(newBogLetter, "", board);
+       for (int i = 0; i < 5; i++){
+           for (int a = 0; a < 5; a++){
+
+               BoggleLetter newBogLetter = new BoggleLetter(i, a, board[i][a]);
+               explore(newBogLetter, "", board);
+
+           }
+       }
+
+
 
 
 

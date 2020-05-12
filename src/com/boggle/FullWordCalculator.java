@@ -1,24 +1,37 @@
 package com.boggle;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 public class FullWordCalculator {
 
-    public static void main(String[] args) {
-        System.out.println(checkIsWordFull("lie"));
-        System.out.println(checkIsWordFull("dog"));
-        System.out.println(checkIsWordFull("do"));
-
-
-
+    public static List<String> readFileInList(String fileName) {
+        List<String> lines = Collections.emptyList();
+        try {
+            lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return lines;
     }
 
+    public static void main(String[] args) {
+        List words = readFileInList("/Users/natashasinghvi/Documents/boggle/src/com/boggle/listOfWords.txt");
+    }
 
-
-
-    public static Boolean checkIsWordFull(String word){
+    public static Boolean checkIsWordFull(String word) {
         int n = 8;
         int count = 0;
+
 
 
         //declaring ArrayList of size n

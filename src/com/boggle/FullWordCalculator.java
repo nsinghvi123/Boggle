@@ -29,31 +29,18 @@ public class FullWordCalculator {
     }
 
     public static Boolean checkIsWordFull(String word) {
-        int n = 8;
-        int count = 0;
 
-
+        List words = readFileInList("/Users/natashasinghvi/Documents/boggle/src/com/boggle/listOfWords.txt");
 
         //declaring ArrayList of size n
-        ArrayList<String> fullWord = new ArrayList<String>(n);
-
-        //adding string elements to ArrayList
-        fullWord.add("dog");
-        fullWord.add("fish");
-        fullWord.add("fire");
-        fullWord.add("home");
-        fullWord.add("hoes");
-        fullWord.add("team");
-        fullWord.add("current");
-        fullWord.add("socks");
-
-        for (int i = 0; i < n; i++) {
-            boolean wordIsFullWord = checkWordisFullWord(word, fullWord.get(i));
-            if (wordIsFullWord) {
+        for (int i = 0; i < words.size(); i++){
+            boolean wordIsFullWord = checkWordisFullWord(word, words.get(i));
+            if (wordIsFullWord){
                 return true;
             }
+            return false;
         }
-        return false;
+
     }
 
 

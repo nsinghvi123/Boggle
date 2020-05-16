@@ -1,55 +1,56 @@
 package com.boggle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
+
     public static void main(String[] args) {
-        System.out.println("Hello World");
-        System.out.println(fibRecurse(6));
+        char[][] board = {
+                {'d', 'h', 't', 'm', 'e'},
+                {'o', 'f', 'o', 'd', 'l'},
+                {'i', 'g', 'b', 'a', 'c'},
+                {'r', 's', 'e', 'm', 'r'},
+                {'e', 't', 'h', 'n', 'p'},
+        };
+
+
+       for (int i = 0; i < 5; i++){
+           for (int a = 0; a < 5; a++){
+               BoggleLetter newBogLetter = new BoggleLetter(i, a, board[i][a]);
+               explore(newBogLetter, "", board);
+           }
+       }
     }
 
-    /**
-     * for 0, throw. for 1, 1. for 2, 1; for 3,
-     * @param n
-     * @return
-     */
-    public static int fib(int n) {
-        if (n == 0) {
-            throw new RuntimeException("there is no 0th number");
-        }
-        int fib1 = 0;
-        int fib2 = 1;
-        if (n == 1) {
-            return fib1;
-        } else if (n == 2) {
-            return fib2;
-        }
-        for (int i = 2; i < n; ++i) {
-            int next = fib1 + fib2;
-            fib1 = fib2;
-            fib2 = next;
-        }
-        return fib2;
-    }
+    public static void explore(BoggleLetter boggleLetter, String path, char board[][]) {
+        // when i start, i explore the current letter
+        path += boggleLetter.getVal();
+        // figures out all the accessible options to the current letter
+        List<BoggleLetter> lettersToExplore = boggleLetter.adjacentLetters(board);
+        // checks if the word is a prefix
+        Boolean isPrefix = WordPrefixCalculator.checkIsWordPrefix(path);
+        // checks if the word is a full word
+        Boolean isWordFull = FullWordCalculator.checkIsWordFull(path);
 
-
-    public static int fibRecurse(int n) {
-        if (n == 0) {
-            throw new RuntimeException("there is no 0th number");
+        if (isWordFull){
+            System.out.println(path);
         }
-        return fibRecursHelper(n, 0, 0, 0);
-    }
-
-    public static int fibRecursHelper(int n, int current, int prev1, int prev2) {
-        int currentFib = prev1 + prev2;;
-        if (current == 1) {
-            currentFib = 0;
-        } else if (current == 2) {
-            currentFib = 1;
-        }
-        if (n == current) {
-            return currentFib;
-        } else {
-            return fibRecursHelper(n, current + 1, prev2, currentFib);
+        if (isPrefix) {
+            for (int i = 0; i < lettersToExplore.size(); i++) {
+                explore(lettersToExplore.get(i), path, board);
+            }
         }
     }
 }
+
+    // base case: it not a prefix, not call explore and return something
+    // 2nd case: if it is a full word, then print it out (refer to that function)
+    // 3rd case: find all the adjacent letters and call explore
+
+
+
+
+
+

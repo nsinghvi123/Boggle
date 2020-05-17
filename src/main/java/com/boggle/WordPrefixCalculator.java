@@ -1,33 +1,36 @@
 package com.boggle;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class WordPrefixCalculator {
 
+    public static List<String> readFileInList(String fileName) {
+        List<String> lines = Collections.emptyList();
+        try {
+            lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(checkIsWordPrefix("do"));
+        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/listOfWords.txt");
     }
 
     public static Boolean checkIsWordPrefix(String prefix){
-        int n = 8;
-        int count = 0;
+        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/listOfWords.txt");
 
-
-        //declaring ArrayList of size n
-        ArrayList<String> fullWord = new ArrayList<String>(n);
-
-        //adding string elements to ArrayList
-        fullWord.add("dog");
-        fullWord.add("fish");
-        fullWord.add("fire");
-        fullWord.add("home");
-        fullWord.add("hoes");
-        fullWord.add("team");
-        fullWord.add("current");
-        fullWord.add("socks");
-
-        for (int i = 0; i < n; i++) {
-            boolean wordHasPrefix = checkWordHasPrefix(prefix, fullWord.get(i));
+        for (int i = 0; i < words.size(); i++) {
+            boolean wordHasPrefix = checkWordHasPrefix(prefix, words.get(i));
             if (wordHasPrefix) {
                 return true;
             }

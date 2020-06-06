@@ -1,3 +1,5 @@
 out/
 build/
 .gradle/
+**/vision-api-key.json
+**/*.log

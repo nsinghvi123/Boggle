@@ -9,21 +9,16 @@ public class Vertex {
      int x;
      int y;
 
-
-    public static void main(String[] args) {
-
-    }
-
     public Vertex(int xOne, int yOne){
-        x = xOne;
-        y = yOne;
+        this.x = xOne;
+        this.y = yOne;
     }
 
     public int getX(){
-        return x;
+        return this.x;
     }
 
     public int getY(){
-        return y;
+        return this.y;
     }
 }

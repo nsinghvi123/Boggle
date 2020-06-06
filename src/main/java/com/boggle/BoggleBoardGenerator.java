@@ -38,11 +38,12 @@ public class BoggleBoardGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        int width = getWidth();
-        int height = getHeight();
+        ImageSize newImageSize = calculateImageSize("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg");
+        int width = newImageSize.getWidth();
+        int height = newImageSize.getHeight();
+
         List<EntityAnnotation> finalAnnotation = new ArrayList<EntityAnnotation>();
         finalAnnotation = returnAnnotationsViaGoogle();
-
 
         for (int i = 1; i < finalAnnotation.size(); i++){
             BoggleBoardGenerator boggleBoardGenerator = new BoggleBoardGenerator();
@@ -59,7 +60,7 @@ public class BoggleBoardGenerator {
         }
     }
 
-        public static List<EntityAnnotation> returnAnnotationsViaGoogle(){
+    public static List<EntityAnnotation> returnAnnotationsViaGoogle(){
         List <EntityAnnotation> realAnnotation = new ArrayList<EntityAnnotation>();
             // Instantiates a client
             try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
@@ -92,21 +93,17 @@ public class BoggleBoardGenerator {
                 e.printStackTrace();
             }
            return realAnnotation;
-        }
+    }
 
-        public static int getWidth() throws IOException {
+    public static ImageSize calculateImageSize(String filename) throws IOException {
             BufferedImage bimg = ImageIO.read(new File("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg"));
             int width = bimg.getWidth();
-            return width;
-        }
-
-        public static int getHeight() throws IOException {
-            BufferedImage bimg = ImageIO.read(new File("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg"));
             int height = bimg.getHeight();
-            return height;
-        }
+            ImageSize imagesize = new ImageSize(height, width);
+            return imagesize;
+    }
 
-        public ArrayList printAllInBetween(int minimum, int maximum){
+    public ArrayList printAllInBetween(int minimum, int maximum){
             List<Integer> array = new ArrayList<>();
             for (int i = minimum + 1; i <= maximum; i++){
                 array.add(i);

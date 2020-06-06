@@ -18,9 +18,6 @@ public class BoggleAnnotations {
     int colPixelIncrement;
     String description;
 
-    public static void main(String[] args) {
-    }
-
     public BoggleAnnotations(EntityAnnotation newEntity, int width, int height, String description) {
         this.entityAnnotation = newEntity;
         widthActual = width;
@@ -34,45 +31,36 @@ public class BoggleAnnotations {
         description.replaceAll("\\s+", "");
         this.description = description;
     }
-
     public int getBottomLeftX() {
-        bottomLeft.x = entityAnnotation.getBoundingPoly().getVertices(3).getX();
-        return bottomLeft.x;
+        return this.bottomLeft.x;
     }
 
     public int getBottomLeftY() {
-        bottomLeft.y = entityAnnotation.getBoundingPoly().getVertices(3).getY();
-        return bottomLeft.y;
+        return this.bottomLeft.y;
     }
 
     public int getBottomRightX() {
-        bottomRight.x = entityAnnotation.getBoundingPoly().getVertices(2).getX();
-        return bottomRight.x;
+        return this.bottomRight.x;
     }
 
     public int getBottomRightY() {
-        bottomRight.y = entityAnnotation.getBoundingPoly().getVertices(2).getY();
-        return bottomRight.y;
+        return this.bottomRight.y;
     }
 
     public int getTopRightX() {
-        topRight.x = entityAnnotation.getBoundingPoly().getVertices(1).getX();
-        return topRight.x;
+        return this.topRight.x;
     }
 
     public int getTopRightY() {
-        topRight.y = entityAnnotation.getBoundingPoly().getVertices(1).getY();
-        return topRight.y;
+        return this.topRight.y;
     }
 
     public int getTopLeftX() {
-        topLeft.x = entityAnnotation.getBoundingPoly().getVertices(0).getX();
-        return topLeft.x;
+        return this.topLeft.x;
     }
 
     public int getTopLeftY() {
-        topLeft.y = entityAnnotation.getBoundingPoly().getVertices(0).getY();
-        return topLeft.y;
+        return this.topLeft.y;
     }
 
     public int findClosestLineNumber(int coordinate, int pixelIncrement) {

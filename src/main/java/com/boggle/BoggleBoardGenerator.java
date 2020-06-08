@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class BoggleBoardGenerator {
-    static Map<Vertex,Character> map = new HashMap<>();
+    static Map<Vertex, Character> map = new HashMap<>();
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
             .registerModule(new Jdk8Module());
@@ -38,9 +38,10 @@ public class BoggleBoardGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        ImageSize newImageSize = calculateImageSize("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg");
+        ImageSize newImageSize = calculateImageSize("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg");
         int width = newImageSize.getWidth();
         int height = newImageSize.getHeight();
+        Character[][] arrayLetter = new Character[5][5];
 
         List<EntityAnnotation> finalAnnotation = new ArrayList<EntityAnnotation>();
         finalAnnotation = returnAnnotationsViaGoogle();
@@ -48,7 +49,6 @@ public class BoggleBoardGenerator {
         for (int i = 1; i < finalAnnotation.size(); i++){
             BoggleBoardGenerator boggleBoardGenerator = new BoggleBoardGenerator();
             BoggleAnnotations boggleAnnotations = new BoggleAnnotations(finalAnnotation.get(i), width, height, finalAnnotation.get(i).getDescription());
-            System.out.println("Index: " + i); //prints out the information for each index of finalAnnotation
             int colMin = boggleAnnotations.findClosestLineNumber(boggleAnnotations.getTopLeftX(), boggleAnnotations.rowPixelIncrement);
             int colMax = boggleAnnotations.findClosestLineNumber(boggleAnnotations.getTopRightX(), boggleAnnotations.rowPixelIncrement);
             int rowMin = boggleAnnotations.findClosestLineNumber(boggleAnnotations.getTopRightY(), boggleAnnotations.colPixelIncrement);
@@ -56,7 +56,14 @@ public class BoggleBoardGenerator {
             List<Integer> arrayRow = boggleBoardGenerator.printAllInBetween(rowMin, rowMax);
             List<Integer> arrayCol = boggleBoardGenerator.printAllInBetween(colMin, colMax);
             boggleBoardGenerator.AllVertexCombinations(arrayRow, arrayCol, boggleAnnotations.description);
-            System.out.println(map);
+        }
+
+        arrayLetter = generateBoard(map);
+        for (int i = 0; i < arrayLetter.length; i++){
+            for (int a = 0; a < arrayLetter.length; a++){
+                System.out.print(arrayLetter[i][a] + " ");
+            }
+            System.out.print("\n");
         }
     }
 
@@ -66,7 +73,7 @@ public class BoggleBoardGenerator {
             try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
 
                 // The path to the image file to annotate
-                String fileName = "/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg";
+                String fileName = "/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg";
 
                 // Reads the image file into memory
                 Path path = Paths.get(fileName);
@@ -96,7 +103,7 @@ public class BoggleBoardGenerator {
     }
 
     public static ImageSize calculateImageSize(String filename) throws IOException {
-            BufferedImage bimg = ImageIO.read(new File("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg"));
+            BufferedImage bimg = ImageIO.read(new File("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg"));
             int width = bimg.getWidth();
             int height = bimg.getHeight();
             ImageSize imagesize = new ImageSize(height, width);
@@ -122,4 +129,16 @@ public class BoggleBoardGenerator {
             }
         }
     }
+
+    public static Character[][] generateBoard(Map<Vertex,Character> finalMap){
+        Character arr[][] = new Character[5][5];
+        for (Map.Entry<Vertex,Character> entry : finalMap.entrySet()) {
+           int x = entry.getKey().getX();
+           int y = entry.getKey().getY();
+           Character letter = entry.getValue();
+           arr[x-1][y-1] = letter;
+        }
+        return arr;
+    }
 }
+

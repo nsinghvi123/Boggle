@@ -21,6 +21,8 @@ import java.util.*;
 
 public class BoggleBoardGenerator {
     static Map<Vertex, Character> map = new HashMap<>();
+    static Map<String,Character> alreadyProcessedVertices = new HashMap<>();
+    static Map<Vertex, Character> finalMap = new HashMap<>();
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
             .registerModule(new Jdk8Module());
@@ -44,7 +46,7 @@ public class BoggleBoardGenerator {
         Character[][] arrayLetter = new Character[5][5];
 
         List<EntityAnnotation> finalAnnotation = new ArrayList<EntityAnnotation>();
-        finalAnnotation = returnAnnotationsViaGoogle();
+        finalAnnotation = returnAnnotationsViaGoogle("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg");
 
         for (int i = 1; i < finalAnnotation.size(); i++){
             BoggleBoardGenerator boggleBoardGenerator = new BoggleBoardGenerator();
@@ -57,7 +59,7 @@ public class BoggleBoardGenerator {
             List<Integer> arrayCol = boggleBoardGenerator.printAllInBetween(colMin, colMax);
             boggleBoardGenerator.AllVertexCombinations(arrayRow, arrayCol, boggleAnnotations.description);
         }
-
+        checkVertex newVertex = new checkVertex(map);
         arrayLetter = generateBoard(map);
         for (int i = 0; i < arrayLetter.length; i++){
             for (int a = 0; a < arrayLetter.length; a++){
@@ -67,13 +69,10 @@ public class BoggleBoardGenerator {
         }
     }
 
-    public static List<EntityAnnotation> returnAnnotationsViaGoogle(){
+    public static List<EntityAnnotation> returnAnnotationsViaGoogle(String fileName){
         List <EntityAnnotation> realAnnotation = new ArrayList<EntityAnnotation>();
             // Instantiates a client
             try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
-
-                // The path to the image file to annotate
-                String fileName = "/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg";
 
                 // Reads the image file into memory
                 Path path = Paths.get(fileName);
@@ -139,6 +138,58 @@ public class BoggleBoardGenerator {
            arr[x-1][y-1] = letter;
         }
         return arr;
+    }
+
+    public void checkVertexRepetition(Map<Vertex, Character> checkMap){
+        int highest = 0;
+        Character mostFrequentLetter = null;
+        List<Character> sameVertexLetter = new ArrayList<>();
+
+        for (Map.Entry<Vertex,Character> entry : checkMap.entrySet()){
+            int count = 0;
+            int x = entry.getKey().getX();
+            int y = entry.getKey().getY();
+            Character letter = entry.getValue();
+            sameVertexLetter.add(letter);
+            Vertex original = new Vertex(x, y);
+            alreadyProcessedVertices.put(original.toString(), letter);
+
+            if (alreadyProcessedVertices.containsKey(original.toString())) {
+                continue;
+            }
+            else {
+                for (Map.Entry<Vertex,Character> entryOne : checkMap.entrySet()){
+                    int anotherX = entry.getKey().getX();
+                    int anotherY = entry.getKey().getY();
+                    Character anotherLetter = entry.getValue();
+                    if (anotherX == x && anotherY == y) {
+                        sameVertexLetter.add(anotherLetter);
+                        count++;
+                    }
+                }
+                if (count > 1){
+                    for (int i = 0; i < sameVertexLetter.size(); i++){
+                        int num = Collections.frequency(sameVertexLetter, sameVertexLetter.get(i));
+                        if (num > highest){
+                            highest = num;
+                            mostFrequentLetter = sameVertexLetter.get(i);
+                        }
+                    }
+                    Vertex newVertex = new Vertex(x, y);
+                    finalMap.put(newVertex, mostFrequentLetter);
+                    alreadyProcessedVertices.put(newVertex.toString(), mostFrequentLetter);
+                }
+                else {
+                    Vertex sameVertex = new Vertex(x, y);
+                    finalMap.put(sameVertex, letter);
+                    alreadyProcessedVertices.put(sameVertex.toString(), letter);
+                }
+                sameVertexLetter.clear();
+                highest = 0;
+            }
+
+        }
+
     }
 }
 

@@ -34,6 +34,8 @@ public class BoggleLetter {
                   continue;
               } else if (i == row && a == col) {
                   continue;
+              } else if (board[i][a] == '\0') {
+                  continue;
               }
               result.add(new BoggleLetter(i, a, board[i][a]));
           }

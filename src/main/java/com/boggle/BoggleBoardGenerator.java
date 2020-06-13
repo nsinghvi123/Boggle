@@ -7,13 +7,11 @@ import com.google.cloud.vision.v1.Image;
 import com.google.protobuf.ByteString;
 
 import javax.imageio.ImageIO;
-import javax.swing.text.html.parser.Entity;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -59,7 +57,7 @@ public class BoggleBoardGenerator {
             List<Integer> arrayCol = boggleBoardGenerator.printAllInBetween(colMin, colMax);
             boggleBoardGenerator.AllVertexCombinations(arrayRow, arrayCol, boggleAnnotations.description);
         }
-        checkVertex newVertex = new checkVertex(map);
+        CheckVertexRepetitionTest newVertex = new CheckVertexRepetitionTest(map);
         arrayLetter = generateBoard(map);
         for (int i = 0; i < arrayLetter.length; i++){
             for (int a = 0; a < arrayLetter.length; a++){

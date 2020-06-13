@@ -2,7 +2,7 @@ package com.boggle;
 
 import java.util.*;
 
-public class checkVertex {
+public class CheckVertexRepetitionTest {
     private Map<Vertex, Character> map = new HashMap<>();
     private Map<String,Character> alreadyProcessedVertices = new HashMap<>();
     private Map<Vertex, Character> finalMap = new HashMap<>();
@@ -28,13 +28,13 @@ public class checkVertex {
         testMap.put(vertexFour, thirdLetter);
         testMap.put(vertexFive, fourthLetter);
         testMap.put(vertexSix, fifthLetter);
-        checkVertex newVertex = new checkVertex(testMap);
+        CheckVertexRepetitionTest newVertex = new CheckVertexRepetitionTest(testMap);
         newVertex.checkVertexRepetition(testMap);
 
 
     }
 
-    public checkVertex(Map passInMap){
+    public CheckVertexRepetitionTest(Map passInMap){
         this.map = passInMap;
     }
 

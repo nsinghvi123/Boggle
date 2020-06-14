@@ -19,8 +19,8 @@ import java.util.*;
 
 public class BoggleBoardGenerator {
     static Map<Vertex, Character> map = new HashMap<>();
-    static Map<String,Character> alreadyProcessedVertices = new HashMap<>();
-    static Map<Vertex, Character> finalMap = new HashMap<>();
+    private Map<String,Character> alreadyProcessedVertices = new HashMap<>();
+    private Map<Vertex, Character> finalMap = new HashMap<>();
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
             .registerModule(new Jdk8Module());
@@ -57,7 +57,6 @@ public class BoggleBoardGenerator {
             List<Integer> arrayCol = boggleBoardGenerator.printAllInBetween(colMin, colMax);
             boggleBoardGenerator.AllVertexCombinations(arrayRow, arrayCol, boggleAnnotations.description);
         }
-        CheckVertexRepetitionTest newVertex = new CheckVertexRepetitionTest(map);
         arrayLetter = generateBoard(map);
         for (int i = 0; i < arrayLetter.length; i++){
             for (int a = 0; a < arrayLetter.length; a++){
@@ -100,7 +99,7 @@ public class BoggleBoardGenerator {
     }
 
     public static ImageSize calculateImageSize(String filename) throws IOException {
-            BufferedImage bimg = ImageIO.read(new File("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg"));
+            BufferedImage bimg = ImageIO.read(new File(filename));
             int width = bimg.getWidth();
             int height = bimg.getHeight();
             ImageSize imagesize = new ImageSize(height, width);

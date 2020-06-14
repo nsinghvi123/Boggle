@@ -1,4 +1,4 @@
-package com.boggle;
+import com.boggle.Vertex;
 
 import java.util.*;
 
@@ -34,16 +34,16 @@ public class CheckVertexRepetitionTest {
 
     }
 
-    public CheckVertexRepetitionTest(Map passInMap){
-        this.map = passInMap;
+    public CheckVertexRepetitionTest(Map currentMap){
+        this.map = currentMap;
     }
 
-    public void checkVertexRepetition(Map<Vertex, Character> checkMap){
+    public void checkVertexRepetition(Map<Vertex, Character> allAnnotatedEntries){
         int highest = 0;
         Character mostFrequentLetter = null;
         List<Character> sameVertexLetter = new ArrayList<>();
 
-        for (Map.Entry<Vertex,Character> entry : checkMap.entrySet()){
+        for (Map.Entry<Vertex,Character> entry : allAnnotatedEntries.entrySet()){
             int count = 0;
             int x = entry.getKey().getX();
             int y = entry.getKey().getY();
@@ -55,7 +55,7 @@ public class CheckVertexRepetitionTest {
             }
             else {
                 alreadyProcessedVertices.put(original.toString(), letter);
-                for (Map.Entry<Vertex,Character> entryOne : checkMap.entrySet()){
+                for (Map.Entry<Vertex,Character> entryOne : allAnnotatedEntries.entrySet()){
                     int anotherX = entryOne.getKey().getX();
                     int anotherY = entryOne.getKey().getY();
                     Character anotherLetter = entryOne.getValue();

@@ -1,3 +1,5 @@
+package com.boggle;
+
 import com.boggle.BoggleLetter;
 
 public class BoggleLetterTest {

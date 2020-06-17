@@ -12,6 +12,7 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,18 +35,21 @@ public class BoggleBoardGenerator {
         return data.getData();
     }
 
-    public static void main(String[] args) throws Exception {
-        ImageSize newImageSize = calculateImageSize("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg");
+    public static void main(String[] args) throws IOException {
+        returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg");
+    }
+
+    public static Character[][] returnBoggleBoard(String filename) throws IOException {
+        ImageSize newImageSize = calculateImageSize(filename);
         int width = newImageSize.getWidth();
         int height = newImageSize.getHeight();
-        Character[][] arrayLetter = new Character[5][5];
+        Character[][] arrayOfLettersOfBoard = new Character[5][5];
         BoggleBoardGenerator newMap = new BoggleBoardGenerator();
-
-
         List<EntityAnnotation> finalAnnotation = new ArrayList<EntityAnnotation>();
-        finalAnnotation = returnAnnotationsViaGoogle("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg");
+        finalAnnotation = returnAnnotationsViaGoogle(filename);
         Map<Vertex, Character> allEntries = new HashMap<>();
-        Map<Vertex, Character> NoRepetitionEntries = new HashMap<>();
+        Map<Vertex, Character> noRepetitionEntries = new HashMap<>();
+
         for (int i = 1; i < finalAnnotation.size(); i++){
             BoggleBoardGenerator boggleBoardGenerator = new BoggleBoardGenerator();
             BoggleAnnotations boggleAnnotations = new BoggleAnnotations(finalAnnotation.get(i), width, height, finalAnnotation.get(i).getDescription());
@@ -59,14 +63,15 @@ public class BoggleBoardGenerator {
                     boggleBoardGenerator.getVertexCharacterCombinations(arrayRow, arrayCol, boggleAnnotations.description);
             allEntries.putAll(vertexCharacterCombinations);
         }
-        NoRepetitionEntries = newMap.checkVertexRepetition(allEntries);
-        arrayLetter = generateBoard(NoRepetitionEntries);
-        for (int i = 0; i < arrayLetter.length; i++){
-            for (int a = 0; a < arrayLetter.length; a++){
-                System.out.print(arrayLetter[i][a] + " ");
+        noRepetitionEntries = newMap.checkVertexRepetition(allEntries);
+        arrayOfLettersOfBoard = generateBoard(noRepetitionEntries);
+        for (int i = 0; i < arrayOfLettersOfBoard.length; i++) {
+            for (int a = 0; a < arrayOfLettersOfBoard.length; a++) {
+                System.out.print(arrayOfLettersOfBoard[i][a] + " ");
             }
             System.out.print("\n");
         }
+        return arrayOfLettersOfBoard;
     }
 
     public static List<EntityAnnotation> returnAnnotationsViaGoogle(String fileName){
@@ -122,7 +127,6 @@ public class BoggleBoardGenerator {
         int letterNum = 0;
         for (int i = 0; i < row.size(); i++){
             for (int a = 0; a < col.size(); a++){
-                System.out.println(row.get(i) + col.get(a));
                 Vertex newVertex = new Vertex(row.get(i), col.get(a));
                 combinations.put(newVertex, description.charAt(letterNum));
                 letterNum++;

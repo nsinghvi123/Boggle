@@ -1,5 +1,7 @@
 package com.boggle;
 
+import org.junit.Test;
+
 import java.util.*;
 
 public class CheckVertexRepetitionTest {
@@ -7,6 +9,7 @@ public class CheckVertexRepetitionTest {
     private Map<String,Character> alreadyProcessedVertices = new HashMap<>();
     private Map<Vertex, Character> finalMap = new HashMap<>();
 
+    @Test
     public static void main(String[] args) {
         Map<Vertex,Character> testMap = new HashMap<>();
         Vertex vertexOne = new Vertex (3, 2);

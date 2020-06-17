@@ -2,7 +2,7 @@ package com.boggle;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestingMain {
+public class TestingBoggleWordGenerator {
 
     @Test
     public void test_explore() {

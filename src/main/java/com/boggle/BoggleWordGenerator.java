@@ -3,28 +3,24 @@ package com.boggle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class BoggleWordGenerator {
 
-
-    public static void main(String[] args) {
-        char[][] board = {
-                {'d', 'h', 't', 'm', 'e'},
-                {'o', 'f', 'o', 'd', 'l'},
-                {'i', 'g', 'b', 'a', 'c'},
-                {'r', 's', 'e', 'm', 'r'},
-                {'e', 't', 'h', 'n', 'p'},
-        };
-
-
-       for (int i = 0; i < 5; i++){
-           for (int a = 0; a < 5; a++){
-               BoggleLetter newBogLetter = new BoggleLetter(i, a, board[i][a]);
-               explore(newBogLetter, "", board);
-           }
-       }
+    public static List<String> generateWords(char[][] board){
+        List<String> finalWordList = new ArrayList<>();
+        List<String> wordsCreatedList = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            for (int a = 0; a < 5; a++){
+                BoggleLetter newBogLetter = new BoggleLetter(i, a, board[i][a]);
+                wordsCreatedList = explore(newBogLetter, "", board, wordsCreatedList);
+                finalWordList.addAll(wordsCreatedList);
+            }
+        }
+        return finalWordList;
     }
 
-    public static void explore(BoggleLetter boggleLetter, String path, char board[][]) {
+
+
+    public static List<String> explore(BoggleLetter boggleLetter, String path, char board[][], List<String> wordsCreatedList) {
         // when i start, i explore the current letter
         path += boggleLetter.getVal();
         // figures out all the accessible options to the current letter
@@ -35,13 +31,14 @@ public class Main {
         Boolean isWordFull = FullWordCalculator.checkIsWordFull(path);
 
         if (isWordFull){
-            System.out.println(path);
+            wordsCreatedList.add(path);
         }
         if (isPrefix) {
             for (int i = 0; i < lettersToExplore.size(); i++) {
-                explore(lettersToExplore.get(i), path, board);
+                explore(lettersToExplore.get(i), path, board, wordsCreatedList);
             }
         }
+        return wordsCreatedList;
     }
 }
 

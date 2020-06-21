@@ -41,7 +41,6 @@ public class FullWordCalculator {
             if (wordIsFullWord){
                 return true;
             }
-
         }
         return false;
     }

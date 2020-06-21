@@ -7,7 +7,6 @@ import com.google.cloud.vision.v1.Image;
 import com.google.protobuf.ByteString;
 
 import javax.imageio.ImageIO;
-import javax.swing.text.html.parser.Entity;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
@@ -20,7 +19,6 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class BoggleBoardGenerator {
-    static Map<Vertex,Character> map = new HashMap<>();
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
             .registerModule(new Jdk8Module());
@@ -37,36 +35,49 @@ public class BoggleBoardGenerator {
         return data.getData();
     }
 
-    public static void main(String[] args) throws Exception {
-        ImageSize newImageSize = calculateImageSize("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg");
+    public static void main(String[] args) throws IOException {
+        returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg");
+    }
+
+    public static Character[][] returnBoggleBoard(String filename) throws IOException {
+        ImageSize newImageSize = calculateImageSize(filename);
         int width = newImageSize.getWidth();
         int height = newImageSize.getHeight();
-
+        Character[][] arrayOfLettersOfBoard = new Character[5][5];
+        BoggleBoardGenerator newMap = new BoggleBoardGenerator();
         List<EntityAnnotation> finalAnnotation = new ArrayList<EntityAnnotation>();
-        finalAnnotation = returnAnnotationsViaGoogle();
+        finalAnnotation = returnAnnotationsViaGoogle(filename);
+        Map<Vertex, Character> allEntries = new HashMap<>();
+        Map<Vertex, Character> noRepetitionEntries = new HashMap<>();
 
         for (int i = 1; i < finalAnnotation.size(); i++){
             BoggleBoardGenerator boggleBoardGenerator = new BoggleBoardGenerator();
             BoggleAnnotations boggleAnnotations = new BoggleAnnotations(finalAnnotation.get(i), width, height, finalAnnotation.get(i).getDescription());
-            System.out.println("Index: " + i); //prints out the information for each index of finalAnnotation
             int colMin = boggleAnnotations.findClosestLineNumber(boggleAnnotations.getTopLeftX(), boggleAnnotations.rowPixelIncrement);
             int colMax = boggleAnnotations.findClosestLineNumber(boggleAnnotations.getTopRightX(), boggleAnnotations.rowPixelIncrement);
             int rowMin = boggleAnnotations.findClosestLineNumber(boggleAnnotations.getTopRightY(), boggleAnnotations.colPixelIncrement);
             int rowMax = boggleAnnotations.findClosestLineNumber(boggleAnnotations.getBottomRightY(), boggleAnnotations.colPixelIncrement);
             List<Integer> arrayRow = boggleBoardGenerator.printAllInBetween(rowMin, rowMax);
             List<Integer> arrayCol = boggleBoardGenerator.printAllInBetween(colMin, colMax);
-            boggleBoardGenerator.AllVertexCombinations(arrayRow, arrayCol, boggleAnnotations.description);
-            System.out.println(map);
+            Map<Vertex, Character> vertexCharacterCombinations =
+                    boggleBoardGenerator.getVertexCharacterCombinations(arrayRow, arrayCol, boggleAnnotations.description);
+            allEntries.putAll(vertexCharacterCombinations);
         }
+        noRepetitionEntries = newMap.checkVertexRepetition(allEntries);
+        arrayOfLettersOfBoard = generateBoard(noRepetitionEntries);
+        for (int i = 0; i < arrayOfLettersOfBoard.length; i++) {
+            for (int a = 0; a < arrayOfLettersOfBoard.length; a++) {
+                System.out.print(arrayOfLettersOfBoard[i][a] + " ");
+            }
+            System.out.print("\n");
+        }
+        return arrayOfLettersOfBoard;
     }
 
-    public static List<EntityAnnotation> returnAnnotationsViaGoogle(){
+    public static List<EntityAnnotation> returnAnnotationsViaGoogle(String fileName){
         List <EntityAnnotation> realAnnotation = new ArrayList<EntityAnnotation>();
             // Instantiates a client
             try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
-
-                // The path to the image file to annotate
-                String fileName = "/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg";
 
                 // Reads the image file into memory
                 Path path = Paths.get(fileName);
@@ -96,7 +107,7 @@ public class BoggleBoardGenerator {
     }
 
     public static ImageSize calculateImageSize(String filename) throws IOException {
-            BufferedImage bimg = ImageIO.read(new File("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/TASHUPhotoboggle.jpeg"));
+            BufferedImage bimg = ImageIO.read(new File(filename));
             int width = bimg.getWidth();
             int height = bimg.getHeight();
             ImageSize imagesize = new ImageSize(height, width);
@@ -111,15 +122,83 @@ public class BoggleBoardGenerator {
             return (ArrayList) array;
         }
 
-    public void AllVertexCombinations(List<Integer> row, List<Integer> col, String description){
+    public Map<Vertex, Character> getVertexCharacterCombinations(List<Integer> row, List<Integer> col, String description){
+        Map<Vertex, Character> combinations = new HashMap<>();
         int letterNum = 0;
         for (int i = 0; i < row.size(); i++){
             for (int a = 0; a < col.size(); a++){
-                System.out.println(row.get(i) + col.get(a));
                 Vertex newVertex = new Vertex(row.get(i), col.get(a));
-                map.put(newVertex, description.charAt(letterNum));
+                combinations.put(newVertex, description.charAt(letterNum));
                 letterNum++;
             }
         }
+        return combinations;
+    }
+
+    public static Character[][] generateBoard(Map<Vertex,Character> finalMap){
+        Character arr[][] = new Character[5][5];
+        for (Map.Entry<Vertex,Character> entry : finalMap.entrySet()) {
+           int x = entry.getKey().getX();
+           int y = entry.getKey().getY();
+           Character letter = entry.getValue();
+           arr[x-1][y-1] = letter;
+        }
+        return arr;
+    }
+
+    public Map<Vertex, Character> checkVertexRepetition(Map<Vertex, Character> allAnnotatedEntries){
+        int highest = 0;
+        Map<String,Character> alreadyProcessedVertices = new HashMap<>();
+        Map<Vertex, Character> finalEntries = new HashMap<>();
+        Character mostFrequentLetter = null;
+        List<Character> sameVertexLetter = new ArrayList<>();
+
+        for (Map.Entry<Vertex,Character> entry : allAnnotatedEntries.entrySet()){
+            int count = 0;
+            int x = entry.getKey().getX();
+            int y = entry.getKey().getY();
+            Character letter = entry.getValue();
+            Vertex original = new Vertex(x, y);
+
+            if (alreadyProcessedVertices.containsKey(original.toString())) {
+                continue;
+            }
+            else {
+                alreadyProcessedVertices.put(original.toString(), letter);
+                for (Map.Entry<Vertex,Character> entryOne : allAnnotatedEntries.entrySet()){
+                    int anotherX = entryOne.getKey().getX();
+                    int anotherY = entryOne.getKey().getY();
+                    Character anotherLetter = entryOne.getValue();
+                    if (anotherX == x && anotherY == y) {
+                        sameVertexLetter.add(anotherLetter);
+                        count++;
+                    }
+                }
+                if (count > 1){
+                    for (int i = 0; i < sameVertexLetter.size(); i++){
+                        int num = Collections.frequency(sameVertexLetter, sameVertexLetter.get(i));
+                        if (num > highest){
+                            highest = num;
+                            mostFrequentLetter = sameVertexLetter.get(i);
+                        }
+                        else {
+                            mostFrequentLetter = null;
+                        }
+                    }
+                    Vertex newVertex = new Vertex(x, y);
+                    finalEntries.put(newVertex, mostFrequentLetter);
+                    alreadyProcessedVertices.put(newVertex.toString(), mostFrequentLetter);
+                }
+                else {
+                    Vertex sameVertex = new Vertex(x, y);
+                    finalEntries.put(sameVertex, letter);
+                    alreadyProcessedVertices.put(sameVertex.toString(), letter);
+                }
+                sameVertexLetter.clear();
+                highest = 0;
+            }
+        }
+        return finalEntries;
     }
 }
+

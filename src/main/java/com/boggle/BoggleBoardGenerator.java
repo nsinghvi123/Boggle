@@ -36,7 +36,7 @@ public class BoggleBoardGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-        returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/src/main/resources/TASHUPhotoboggle.jpeg");
+        returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/src/main/resources/IMG_0426.jpeg");
     }
 
     public static Character[][] returnBoggleBoard(String filename) throws IOException {

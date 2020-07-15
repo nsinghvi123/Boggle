@@ -7,6 +7,7 @@ import io.swagger.api.factories.SolveBoggleApiServiceFactory;
 import io.swagger.annotations.ApiParam;
 import io.swagger.jaxrs.*;
 
+import io.swagger.model.BoggleBoard;
 import io.swagger.model.BoggleWord;
 
 import java.util.Map;
@@ -29,7 +30,7 @@ import javax.validation.constraints.*;
 
 
 @io.swagger.annotations.Api(description = "the solve-boggle API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-07-13T22:01:30.048Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-07-15T19:50:05.497Z")
 public class SolveBoggleApi  {
    private final SolveBoggleApiService delegate;
 
@@ -63,8 +64,9 @@ public class SolveBoggleApi  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "search results matching criteria", response = BoggleWord.class, responseContainer = "List"),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "bad input parameter", response = Void.class) })
-    public Response solveBoggle(@Context SecurityContext securityContext)
+    public Response solveBoggle(@ApiParam(value = "A 2d array represnting boggle boards" ,required=true) BoggleBoard boggleBoard
+,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.solveBoggle(securityContext);
+        return delegate.solveBoggle(boggleBoard,securityContext);
     }
 }

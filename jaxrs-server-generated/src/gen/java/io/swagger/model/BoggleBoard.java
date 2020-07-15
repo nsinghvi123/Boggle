@@ -21,7 +21,7 @@ import javax.validation.constraints.*;
 /**
  * BoggleBoard
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-07-13T22:01:30.048Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-07-15T19:50:05.497Z")
 public class BoggleBoard extends ArrayList<List>  {
 
   @Override

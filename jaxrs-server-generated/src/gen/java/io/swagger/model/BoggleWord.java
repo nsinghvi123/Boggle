@@ -23,7 +23,7 @@ import javax.validation.constraints.*;
 /**
  * BoggleWord
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-07-13T22:01:30.048Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2020-07-15T19:50:05.497Z")
 public class BoggleWord   {
   @JsonProperty("word")
   private String word = null;

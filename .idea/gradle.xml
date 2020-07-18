@@ -9,7 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/resources" />
+            <option value="$PROJECT_DIR$/boggle-api" />
+            <option value="$PROJECT_DIR$/boggle-lib" />
           </set>
         </option>
         <option name="useQualifiedModuleNames" value="true" />

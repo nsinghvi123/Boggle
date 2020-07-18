@@ -25,7 +25,7 @@ public class FullWordCalculator {
     }
 
     public static void main(String[] args) {
-        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/listOfWords.txt");
+        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
         Boolean answer = checkIsWordFull("dog");
         System.out.println(answer);
 
@@ -33,7 +33,7 @@ public class FullWordCalculator {
 
     public static Boolean checkIsWordFull(String word) {
 
-        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/listOfWords.txt");
+        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
 
         //declaring ArrayList of size n
         for (int i = 0; i < words.size(); i++){

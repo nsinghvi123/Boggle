@@ -1,3 +1,4 @@
 rootProject.name = 'boggle'
-include 'resources'
+include 'boggle-api'
+include 'boggle-lib'
 

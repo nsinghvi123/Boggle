@@ -23,11 +23,11 @@ public class WordPrefixCalculator {
 
 
     public static void main(String[] args) {
-        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/listOfWords.txt");
+        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
     }
 
     public static Boolean checkIsWordPrefix(String prefix){
-        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/src/main/java/com/boggle/listOfWords.txt");
+        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
 
         for (int i = 0; i < words.size(); i++) {
             boolean wordHasPrefix = checkWordHasPrefix(prefix, words.get(i));

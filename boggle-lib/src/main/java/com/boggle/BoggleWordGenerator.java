@@ -2,10 +2,12 @@ package com.boggle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
 
 public class BoggleWordGenerator {
 
-    public static List<String> generateWords(char[][] board){
+    public static HashSet<String> generateWords(char[][] board){
+        HashSet<String> finalWordSet = new HashSet<>();
         List<String> finalWordList = new ArrayList<>();
         List<String> wordsCreatedList = new ArrayList<>();
         for (int i = 0; i < 5; i++){
@@ -15,7 +17,8 @@ public class BoggleWordGenerator {
                 finalWordList.addAll(wordsCreatedList);
             }
         }
-        return finalWordList;
+        finalWordSet.addAll(finalWordList);
+        return finalWordSet;
     }
 
 

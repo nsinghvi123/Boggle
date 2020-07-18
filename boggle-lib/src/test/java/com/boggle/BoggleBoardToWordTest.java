@@ -26,9 +26,9 @@ public class BoggleBoardToWordTest {
                 }
             }
         }
-        List<String> allTheWords = generateWords(primitiveCharBoard);
+       /* List<String> allTheWords = generateWords(primitiveCharBoard);
         for(int i = 0; i < allTheWords.size(); i++){
             System.out.println(allTheWords.get(i));
-        }
+        } */
     }
 }

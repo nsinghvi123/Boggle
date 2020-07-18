@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,8 +47,8 @@ public class SolveBoggleApiController implements SolveBoggleApi {
             }
         }
         BoggleWordGenerator newBoggleWordGenerator = new BoggleWordGenerator();
-        List<String> finalWordList = newBoggleWordGenerator.generateWords(finalBoggleBoard);
-        return ResponseEntity.of(Optional.of(finalWordList));
+        HashSet<String> finalWordList = newBoggleWordGenerator.generateWords(finalBoggleBoard);
+        return ResponseEntity.of(Optional.of(new ArrayList<>(finalWordList)));
     }
 
 }

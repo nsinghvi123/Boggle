@@ -1,4 +1,4 @@
 rootProject.name = 'boggle'
-include 'jaxrs-server-generated'
-include 'boggle-server'
+include 'boggle-api'
+include 'boggle-lib'
 

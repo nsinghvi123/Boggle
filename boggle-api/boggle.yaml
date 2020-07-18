@@ -1,0 +1,45 @@
+swagger: '2.0'
+info:
+  description: This is a boggle solver API
+  version: 1.0.0
+  title: Boggle Solver API
+  # put the contact info for your development or API team
+  contact:
+    email: nsinghvi@umich.edu
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+paths:
+  /solve-boggle:
+    post:
+      summary: takes a picture and attempts to play boggle on the board
+      operationId: solveBoggle
+      produces:
+        - application/json
+      parameters:
+        - name: boggleBoard
+          in: body
+          description: "A 2d array representing boggle boards"
+          required: true
+          schema:
+            $ref: '#/definitions/BoggleBoard'
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              type: string
+        400:
+          description: bad input parameter
+definitions:
+  BoggleBoard:
+    type: array
+    items:
+      type: array
+      items:
+        type: string
+schemes:
+  - https

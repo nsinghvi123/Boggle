@@ -6,10 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class FullWordCalculator {
 
@@ -26,7 +23,7 @@ public class FullWordCalculator {
 
     public static void main(String[] args) {
         List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
-        Boolean answer = checkIsWordFull("dog");
+        Boolean answer = checkIsWordFull("djlk");
         System.out.println(answer);
 
     }
@@ -34,35 +31,14 @@ public class FullWordCalculator {
     public static Boolean checkIsWordFull(String word) {
 
         List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
+        HashSet<String> listOfWordsSet = new HashSet<>();
+        listOfWordsSet.addAll(words);
 
-        //declaring ArrayList of size n
-        for (int i = 0; i < words.size(); i++){
-            boolean wordIsFullWord = checkWordisFullWord(word, words.get(i));
-            if (wordIsFullWord){
-                return true;
-            }
+        if (listOfWordsSet.contains(word)){
+            return true;
         }
-        return false;
-    }
-
-
-    public static Boolean checkWordisFullWord(String word, String completeWord){
-
-        int count = 0;
-
-        word = word.toLowerCase();
-        completeWord = completeWord.toLowerCase();
-
-        if (completeWord.length() >= word.length()){
-            for (int i = 0; i < word.length(); i++){
-                if (word.charAt(i) == completeWord.charAt(i)){
-                    count++;
-                }
-                if (count == completeWord.length()){
-                    return true;
-                }
-            }
+        else{
+            return false;
         }
-        return false;
     }
 }

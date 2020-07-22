@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/main/java/com/boggle/WordPrefixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/main/java/com/boggle/WordPrefixCalculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/test/java/com/boggle/TestWordPrefix.java" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/test/java/com/boggle/TestWordPrefix.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/test/java/com/boggle/TestingBoggleWordGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/test/java/com/boggle/TestingBoggleWordGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boggle-frontend/src/BoggleBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-frontend/src/BoggleBoard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

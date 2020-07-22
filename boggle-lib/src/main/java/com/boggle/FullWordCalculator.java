@@ -1,68 +1,22 @@
 package com.boggle;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FullWordCalculator {
+    private Set<String> dictionary = new HashSet<>();
 
-    public static List<String> readFileInList(String fileName) {
-        List<String> lines = Collections.emptyList();
-        try {
-            lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        return lines;
+    public FullWordCalculator(String fileName) throws IOException {
+        List<String> allWords = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+        this.dictionary = new HashSet<>(allWords);
     }
 
-    public static void main(String[] args) {
-        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
-        Boolean answer = checkIsWordFull("dog");
-        System.out.println(answer);
-
-    }
-
-    public static Boolean checkIsWordFull(String word) {
-
-        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
-
-        //declaring ArrayList of size n
-        for (int i = 0; i < words.size(); i++){
-            boolean wordIsFullWord = checkWordisFullWord(word, words.get(i));
-            if (wordIsFullWord){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    public static Boolean checkWordisFullWord(String word, String completeWord){
-
-        int count = 0;
-
-        word = word.toLowerCase();
-        completeWord = completeWord.toLowerCase();
-
-        if (completeWord.length() >= word.length()){
-            for (int i = 0; i < word.length(); i++){
-                if (word.charAt(i) == completeWord.charAt(i)){
-                    count++;
-                }
-                if (count == completeWord.length()){
-                    return true;
-                }
-            }
-        }
-        return false;
+    public Boolean checkIsWordFull(String word) {
+        return dictionary.contains(word);
     }
 }

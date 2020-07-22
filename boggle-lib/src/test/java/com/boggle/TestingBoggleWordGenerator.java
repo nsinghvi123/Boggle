@@ -2,6 +2,7 @@ package com.boggle;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import static com.boggle.BoggleWordGenerator.explore;
 public class TestingBoggleWordGenerator {
 
     @Test
-    public void test_explore() {
+    public void test_explore() throws IOException {
         char[][] board = {
                 {'w', 's', 'r', 'e', 'o'},
                 {'f', 'v', 'y', 'y', 'm'},
@@ -19,10 +20,11 @@ public class TestingBoggleWordGenerator {
                 {'f', 's', 'h', 'i', 'o'},
         };
         List<String> testList = new ArrayList<>();
+        FullWordCalculator exploreTestFullWordCalculator = new FullWordCalculator("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/java/com/boggle/popularWords.txt");
         for (int i = 0; i < 5; i++){
             for (int a = 0; a < 5; a++){
                 BoggleLetter newBogLetter = new BoggleLetter(i,a, board[i][a]);
-                explore(newBogLetter, "", board, testList);
+                explore(newBogLetter, "", board, testList, exploreTestFullWordCalculator);
             }
         }
 

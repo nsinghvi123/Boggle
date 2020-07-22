@@ -3,6 +3,8 @@ package com.boggle;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.boggle.BoggleBoardGenerator.returnBoggleBoard;
@@ -13,7 +15,7 @@ public class BoggleBoardToWordTest {
     @Test
     public void testBoggleBoardToWord() throws IOException {
         Character[][] board = new Character[5][5];
-        board =  returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/src/main/resources/IMG_1560 copy.jpg");
+        board =  returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/resources/IMG_1560 copy.jpg");
         char[][] primitiveCharBoard = new char[5][5];
         for (int i = 0; i < 5; i++){
             for (int a = 0; a < 5; a++){
@@ -26,9 +28,10 @@ public class BoggleBoardToWordTest {
                 }
             }
         }
-        List<String> allTheWords = generateWords(primitiveCharBoard);
-        for(int i = 0; i < allTheWords.size(); i++){
-            System.out.println(allTheWords.get(i));
+        HashSet<String> allTheWords = generateWords(primitiveCharBoard);
+        Iterator<String> it = allTheWords.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
         }
     }
 }

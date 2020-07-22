@@ -8,9 +8,10 @@ public class TestWordPrefix {
 
     @Test
     public void test_IsWordPrefix() {
-        Assert.assertEquals(checkIsWordPrefix("do"), true);
-        Assert.assertEquals(checkIsWordPrefix("th"), true);
-        Assert.assertEquals(checkIsWordPrefix("tk"), false);
+        WordPrefixCalculator wordPrefixCalculator = new WordPrefixCalculator("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
+        Assert.assertEquals(wordPrefixCalculator.checkIsWordPrefix("do"), true);
+        Assert.assertEquals(wordPrefixCalculator.checkIsWordPrefix("th"), true);
+        Assert.assertEquals(wordPrefixCalculator.checkIsWordPrefix("tk"), false);
 
     }
 }

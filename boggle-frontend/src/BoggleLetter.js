@@ -27,7 +27,7 @@ class BoggleLetter extends React.Component {
                         />
                     </form>
                 }>
-                <Button type = "primary" className="big-btn" style={{ background: "white", borderColor: "light blue", color: "#363636", fontSize: '20px'}}>{this.props.letter}             
+                <Button type = "primary" className="big-btn" style={{ background: "turquoise", borderColor: "white", color: "white", fontSize: '20px'}}>{this.props.letter}             
                 </Button>
             </Popover>       
         </span>    

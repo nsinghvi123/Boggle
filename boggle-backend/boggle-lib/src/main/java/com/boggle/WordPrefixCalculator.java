@@ -20,24 +20,6 @@ public class WordPrefixCalculator {
         }
     }
 
-public static void main(String[] args) throws IOException {
-        WordPrefixCalculator wordPrefixCalculator = new WordPrefixCalculator("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
-        Boolean answer = wordPrefixCalculator.checkIsWordPrefix("do");
-        System.out.prinln(answer);
-}
-
-
-//    public static List<String> readFileInList(String fileName) {
-//        List<String> lines = Collections.emptyList();
-//        try {
-//            lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
-//        }
-//        catch (IOException e){
-//            e.printStackTrace();
-//        }
-//        return lines;
-//    }
-
     public Boolean checkIsWordPrefix(String prefix){
         for (int i = 0; i < prefixDictionary.size(); i++) {
             boolean wordHasPrefix = checkWordHasPrefix(prefix, prefixDictionary.get(i));

@@ -1,12 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dsinghvi" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:natasha" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:nsinghvi" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dsinghvi" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:natasha" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:nsinghvi" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="1cca1cd6-1309-41ad-858c-9ab0cc5524c6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/main/java/com/boggle/BoggleWordGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/main/java/com/boggle/BoggleWordGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/main/java/com/boggle/FullWordCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/main/java/com/boggle/FullWordCalculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/main/java/com/boggle/WordPrefixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/main/java/com/boggle/WordPrefixCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/test/java/com/boggle/TestWordPrefix.java" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/test/java/com/boggle/TestWordPrefix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/test/java/com/boggle/TestingBoggleWordGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-backend/boggle-lib/src/test/java/com/boggle/TestingBoggleWordGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boggle-frontend/src/BoggleBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-frontend/src/BoggleBoard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boggle-frontend/src/BoggleLetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/boggle-frontend/src/BoggleLetter.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +74,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -37,5 +90,26 @@
       <updated>1595443889632</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="480" y="238" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595448740144">
+      <screen x="0" y="23" width="1440" height="816" />
+    </state>
+    <state x="480" y="238" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.816@0.23.1440.816" timestamp="1595448740144" />
+    <state x="208" y="23" width="1024" height="821" key="SettingsEditor" timestamp="1595449610677">
+      <screen x="0" y="23" width="1440" height="821" />
+    </state>
+    <state x="208" y="23" width="1024" height="821" key="SettingsEditor/0.23.1440.821@0.23.1440.821" timestamp="1595449610677" />
   </component>
 </project>

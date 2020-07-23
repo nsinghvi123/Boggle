@@ -1,4 +1,4 @@
-giimport React from 'react';
+import React from 'react';
 import BoggleLetter from './BoggleLetter';
 
 class BoggleBoard extends React.Component {

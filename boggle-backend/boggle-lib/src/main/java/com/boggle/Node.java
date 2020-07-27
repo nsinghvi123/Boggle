@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Node {
 
+
     private Map<Character, Node> children = new HashMap<Character, Node>();
 
     public Node(){
@@ -21,6 +22,10 @@ public class Node {
         else{
             return false;
         }
+    }
+
+    public void createNode(char letter){
+        children.put(letter, new Node());
     }
 
 

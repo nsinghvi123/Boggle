@@ -1,9 +1,12 @@
 package com.boggle;
 
+import com.google.cloud.vision.v1.Word;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +20,7 @@ public class Trie {
 
     public boolean isPrefix(String word){
         char firstLetter = word.charAt(0);
-        Tree currentFirstLetter;
+        Tree currentFirstLetter = new Tree();
         currentFirstLetter = alphabetMap.get(firstLetter);
         if (currentFirstLetter.isPrefix(word)){
             return true;
@@ -47,5 +50,29 @@ public class Trie {
         }
         return new Trie(alphabetMap);
     }
+
+    public List<String> allWords() throws IOException {
+        Node currentNode = null;
+        Map<Character,Tree> alphabetMapLetters = new HashMap<>();
+        Map<Character,Tree> randomMap = new HashMap<>();
+        FullWordCalculator newFullWordCalculator = new FullWordCalculator("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
+        alphabetMapLetters = this.alphabetMap;
+        Trie prefixCalculator = new Trie(randomMap);
+        List<String> allWords = new ArrayList<>();
+        for (Map.Entry<Character, Tree> entry : alphabetMapLetters.entrySet()) {
+            String path = "";
+            Tree currentStartLetter = entry.getValue();
+            path += entry.getKey();
+            allWords.addAll(currentStartLetter.exploreNode(path, newFullWordCalculator, prefixCalculator, allWords, currentNode));
+        }
+        return allWords;
+    }
 }
 
+//for (int i = 0; i < alphabetMapLetters.size(); i++){
+//            String path = "";
+//            Tree currentStartLetter = alphabetMapLetters.get(i);
+//            // How do I add the root character for the Tree currentStartLetter to my path?
+//            path += currentStartLetter.toString();
+//            allWords.addAll(currentStartLetter.exploreNode(path, newFullWordCalculator, prefixCalculator, allWords, currentNode));
+//        }

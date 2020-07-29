@@ -15,6 +15,13 @@ public class Node {
         return children;
     }
 
+    public Boolean hasChildren(){
+        if (children.isEmpty()){
+            return false;
+        }
+      return true;
+    }
+
     public boolean childHasLetter(char letter){
         if (children.containsKey(letter)) {
             return true;

@@ -1,6 +1,5 @@
 package com.boggle;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,29 +40,34 @@ public class Tree {
                 currentNode = characterToNode.get(word.charAt(i));
             }
         }
+
     }
 
-    public List<String> exploreNode(String path, FullWordCalculator newFullWordCalculator, Trie prefixCalculator, List<String> wordsCreated, Node currentNode) throws IOException {
+    public List<String> wordsPerTree(char startLetter){
+        String path = "";
+        List<String> wordsPerTree = new ArrayList<>();
+        Node currentNode = root;
         Map<Character, Node> characterToNode = new HashMap<>();
-        characterToNode = root.getChildren();
-        for (int i = 0; i < characterToNode.size(); i++){
-            for (Character key : characterToNode.keySet()) {
-                path += key;
-                Boolean isPrefix = prefixCalculator.isPrefix(path);
-                Boolean isFullWord = newFullWordCalculator.checkIsWordFull(path);
-                if (isFullWord){
-                    wordsCreated.add(path);
+        characterToNode = currentNode.getChildren();
+        path += startLetter;
+        createWordsPerTree(path, wordsPerTree, currentNode);
+        return wordsPerTree;
+    }
+
+    public void createWordsPerTree(String path, List<String> words, Node currentNode){
+        String original = path;
+        Map<Character, Node> characterToNode = new HashMap<>();
+        characterToNode = currentNode.getChildren();
+            for (Map.Entry<Character, Node> entry : characterToNode.entrySet()){
+                path = original;
+                path += entry.getKey();
+                if (entry.getValue().hasChildren()){
+                    currentNode = entry.getValue();
+                    createWordsPerTree(path, words, currentNode);
                 }
-                if (isPrefix) {
-                    currentNode = characterToNode.get(key);
-                    characterToNode = currentNode.getChildren();
-                    for (int j = 0; j < characterToNode.size(); j++){
-                        exploreNode(path, newFullWordCalculator, prefixCalculator, wordsCreated, currentNode);
-                    }
+                else {
+                    words.add(path);
                 }
             }
-
         }
-        return wordsCreated;
     }
-}

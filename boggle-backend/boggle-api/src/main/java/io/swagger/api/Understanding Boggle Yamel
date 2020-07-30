@@ -1,0 +1,31 @@
+The Yaml File is divided into multiple parts.
+
+First Part = Info:
+- This category provides a brief description of the API, version we would like to use, the title of our API, contact information
+and a license.
+Question(s):
+1. What does it mean by version?
+
+Second Part = Paths:
+- We first come up with a path for the current API we're writing, so we know how to access it.
+- Within the paths section, we have a post section through which we get to define the input/output (tells us what is expected
+of client and server).
+- We have a summary section which summarizes our goal, in this case we take a picture of the boggle board, send it to the server,
+and it returns a list of boggle Words.
+- We have an operation ID (we name the function) and we produce a json file (json is a language used to communicate between
+client and server)
+- We define the parameter for the input which is a 2d array boggleBoard.
+- We define the responses section with a description of the output and type of output we are expecting (array).
+
+Question(s):
+1. How did you come up with the schema references?
+2. What does the 200/400 (Line 29 and 35) integers signify in the responses section?
+
+Third Part = Definitions:
+- We define the input and output. The BoggleWord is an object of type string because it a list of string that we are returning.
+ The BoggleBoard is an an array of 5 arrays of type string.
+
+Question(s):
+1. After we wrote the (type:) on line 39, what does properties and word mean?
+2. After we wrote the (type:) on line 44, what does the items mean?
+

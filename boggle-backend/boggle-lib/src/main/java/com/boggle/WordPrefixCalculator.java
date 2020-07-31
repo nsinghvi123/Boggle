@@ -9,23 +9,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class WordPrefixCalculator {
+    private List<String> prefixDictionary = new ArrayList<>();
 
-    public static List<String> readFileInList(String fileName) {
-        List<String> lines = Collections.emptyList();
+    public WordPrefixCalculator(String fileName) {
         try {
-            lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+            this.prefixDictionary = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
         }
         catch (IOException e){
             e.printStackTrace();
         }
-        return lines;
     }
 
-    public static Boolean checkIsWordPrefix(String prefix){
-        List<String> words = readFileInList("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
-
-        for (int i = 0; i < words.size(); i++) {
-            boolean wordHasPrefix = checkWordHasPrefix(prefix, words.get(i));
+    public Boolean checkIsWordPrefix(String prefix){
+        for (int i = 0; i < prefixDictionary.size(); i++) {
+            boolean wordHasPrefix = checkWordHasPrefix(prefix, prefixDictionary.get(i));
             if (wordHasPrefix) {
                 return true;
             }
@@ -33,7 +30,7 @@ public class WordPrefixCalculator {
         return false;
     }
 
-    private static boolean checkWordHasPrefix(String prefix, String fullWord) {
+    private boolean checkWordHasPrefix(String prefix, String fullWord) {
         int count = 0;
         if (fullWord.length() >= prefix.length()){
             for (int a = 0; a < prefix.length(); a++){

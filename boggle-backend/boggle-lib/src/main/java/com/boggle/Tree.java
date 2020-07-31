@@ -43,7 +43,7 @@ public class Tree {
 
     }
 
-    public List<String> wordsPerTree(char startLetter){
+    public List<String> getAllWordsInTree(char startLetter){
         String path = "";
         List<String> wordsPerTree = new ArrayList<>();
         Node currentNode = root;
@@ -54,7 +54,7 @@ public class Tree {
         return wordsPerTree;
     }
 
-    public void createWordsPerTree(String path, List<String> words, Node currentNode){
+    private void createWordsPerTree(String path, List<String> words, Node currentNode){
         String original = path;
         Map<Character, Node> characterToNode = new HashMap<>();
         characterToNode = currentNode.getChildren();

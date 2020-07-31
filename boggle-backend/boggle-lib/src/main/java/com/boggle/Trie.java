@@ -54,7 +54,7 @@ public class Trie {
         for (Map.Entry<Character, Tree> entry : this.alphabetMap.entrySet()){
             Tree currentTree = entry.getValue();
             Character startLetter = entry.getKey();
-            allWords.addAll(currentTree.wordsPerTree(startLetter));
+            allWords.addAll(currentTree.getAllWordsInTree(startLetter));
         }
         return allWords;
     }

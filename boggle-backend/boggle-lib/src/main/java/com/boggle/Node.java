@@ -23,12 +23,7 @@ public class Node {
     }
 
     public boolean childHasLetter(char letter){
-        if (children.containsKey(letter)) {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return children.containsKey(letter);
     }
 
     public void createNode(char letter){

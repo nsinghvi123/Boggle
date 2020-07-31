@@ -37,7 +37,7 @@ paths:
   /get-boggle-board:
     post:
       summary: takes in a file (picture of boggle board and returns a 2d array boggle board)
-      operationID: getBoggleBoard
+      operationId: getBoggleBoard
       produces:
         -application/json
       parameters:
@@ -65,7 +65,5 @@ definitions:
         type: string
   FileName:
     type: string
-    items:
-
 schemes:
   - https

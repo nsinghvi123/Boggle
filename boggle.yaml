@@ -38,22 +38,18 @@ paths:
     post:
       summary: takes in a file (picture of boggle board and returns a 2d array boggle board)
       operationId: getBoggleBoard
-      produces:
-        -application/json
+      consumes:
+        - multipart/form-data
       parameters:
-        - name: fileName
-          in:
-          description: "A file with a picture of the boggle Board"
-          required: true
-          schema:
-            $ref: '#/definitions/fileName'
+        - in: formData
+          name: imageFile
+          type: file
+          description: The file to upload.
       responses:
         200:
           description: returns a boggle board
           schema:
-            type: array
-            items:
-              type: string
+            $ref: '#/definitions/BoggleBoard'
         400:
           description: bad input parameter
 definitions:
@@ -63,7 +59,5 @@ definitions:
       type: array
       items:
         type: string
-  FileName:
-    type: string
 schemes:
   - https

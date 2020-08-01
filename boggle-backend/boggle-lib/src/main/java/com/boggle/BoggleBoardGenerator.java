@@ -13,6 +13,7 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,17 +37,17 @@ public class BoggleBoardGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-        returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/src/main/resources/IMG_0426.jpeg");
+       // returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/resources/IMG_0426.jpeg");
     }
 
-    public static Character[][] returnBoggleBoard(String filename) throws IOException {
-        ImageSize newImageSize = calculateImageSize(filename);
+    public static Character[][] returnBoggleBoard(byte[] fileBytes) throws IOException {
+        ImageSize newImageSize = calculateImageSize(fileBytes);
         int width = newImageSize.getWidth();
         int height = newImageSize.getHeight();
         Character[][] arrayOfLettersOfBoard = new Character[5][5];
         BoggleBoardGenerator newMap = new BoggleBoardGenerator();
         List<EntityAnnotation> finalAnnotation = new ArrayList<EntityAnnotation>();
-        finalAnnotation = returnAnnotationsViaGoogle(filename);
+        finalAnnotation = returnAnnotationsViaGoogle(fileBytes);
         Map<Vertex, Character> allEntries = new HashMap<>();
         Map<Vertex, Character> noRepetitionEntries = new HashMap<>();
 
@@ -74,7 +75,8 @@ public class BoggleBoardGenerator {
         return arrayOfLettersOfBoard;
     }
 
-    public static List<EntityAnnotation> returnAnnotationsViaGoogle(String fileName){
+    public static List<EntityAnnotation> returnAnnotationsViaGoogle(byte[] fileBytes){
+        String fileName = new String(fileBytes, StandardCharsets.UTF_8);
         List <EntityAnnotation> realAnnotation = new ArrayList<EntityAnnotation>();
             // Instantiates a client
             try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
@@ -106,8 +108,9 @@ public class BoggleBoardGenerator {
            return realAnnotation;
     }
 
-    public static ImageSize calculateImageSize(String filename) throws IOException {
-            BufferedImage bimg = ImageIO.read(new File(filename));
+    public static ImageSize calculateImageSize(byte[] fileBytes) throws IOException {
+            String fileName = new String(fileBytes, StandardCharsets.UTF_8);
+            BufferedImage bimg = ImageIO.read(new File(fileName));
             int width = bimg.getWidth();
             int height = bimg.getHeight();
             ImageSize imagesize = new ImageSize(height, width);

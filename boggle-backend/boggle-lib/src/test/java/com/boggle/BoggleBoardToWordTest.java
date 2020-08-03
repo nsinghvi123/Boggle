@@ -15,7 +15,7 @@ public class BoggleBoardToWordTest {
     @Test
     public void testBoggleBoardToWord() throws IOException {
         Character[][] board = new Character[5][5];
-        board =  returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/resources/IMG_1560 copy.jpg");
+       // board =  returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/boggle-lib/src/main/resources/IMG_1560 copy.jpg");
         char[][] primitiveCharBoard = new char[5][5];
         for (int i = 0; i < 5; i++){
             for (int a = 0; a < 5; a++){

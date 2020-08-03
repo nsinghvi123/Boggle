@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -76,15 +77,11 @@ public class BoggleBoardGenerator {
     }
 
     public static List<EntityAnnotation> returnAnnotationsViaGoogle(byte[] fileBytes){
-        String fileName = new String(fileBytes, StandardCharsets.UTF_8);
         List <EntityAnnotation> realAnnotation = new ArrayList<EntityAnnotation>();
             // Instantiates a client
             try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
 
-                // Reads the image file into memory
-                Path path = Paths.get(fileName);
-                byte[] data = Files.readAllBytes(path);
-                ByteString imgBytes = ByteString.copyFrom(data);
+                ByteString imgBytes = ByteString.copyFrom(fileBytes);
 
                 // Builds the image annotation request
                 List<AnnotateImageRequest> requests = new ArrayList<>();
@@ -109,8 +106,8 @@ public class BoggleBoardGenerator {
     }
 
     public static ImageSize calculateImageSize(byte[] fileBytes) throws IOException {
-            String fileName = new String(fileBytes, StandardCharsets.UTF_8);
-            BufferedImage bimg = ImageIO.read(new File(fileName));
+            ByteArrayInputStream byteaArrayInputStream = new ByteArrayInputStream(fileBytes);
+            BufferedImage bimg = ImageIO.read(byteaArrayInputStream);
             int width = bimg.getWidth();
             int height = bimg.getHeight();
             ImageSize imagesize = new ImageSize(height, width);

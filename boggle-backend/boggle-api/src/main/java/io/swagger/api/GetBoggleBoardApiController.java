@@ -21,9 +21,7 @@ import javax.validation.constraints.*;
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-07-31T20:55:18.710-04:00")
 
@@ -42,26 +40,29 @@ public class GetBoggleBoardApiController implements GetBoggleBoardApi {
         this.request = request;
     }
 
-    public ResponseEntity<BoggleBoard> getBoggleBoard(@ApiParam(value = "file detail") @Valid @RequestPart("file") MultipartFile imageFile) throws IOException {
-        Character [][] finalBoggleBoard = new Character[5][5];
-        String [][] stringFinalBoggleBoard = new String[5][5];
-        Character [] array = new Character[5];
-        byte[] fileBytes = imageFile.getBytes();
-        BoggleBoardGenerator boggleBoardGenerator = new BoggleBoardGenerator();
-        finalBoggleBoard = boggleBoardGenerator.returnBoggleBoard(fileBytes);
-        for (int i = 0; i < finalBoggleBoard.length; i++){
-            for (int j = 0; j < finalBoggleBoard.length; j++){
-                String letter = String.valueOf(finalBoggleBoard[i][j]);
-                stringFinalBoggleBoard[i][j] = letter;
+    public ResponseEntity<BoggleBoard> getBoggleBoard(@ApiParam(value = "file detail") @Valid @RequestPart("file") MultipartFile imageFile) {
+        try {
+            Character [][] finalBoggleBoard = new Character[5][5];
+            BoggleBoard boggleBoard = new BoggleBoard();
+            byte[] fileBytes = imageFile.getBytes();
+            BoggleBoardGenerator boggleBoardGenerator = new BoggleBoardGenerator();
+            finalBoggleBoard = boggleBoardGenerator.returnBoggleBoard(fileBytes);
+            for (int i = 0; i < finalBoggleBoard.length; i++){
+                List<String> stringFinalBoggleBoard = new ArrayList<>();
+                for (int j = 0; j < finalBoggleBoard.length; j++){
+                    String letter = String.valueOf(finalBoggleBoard[i][j]);
+                    stringFinalBoggleBoard.add(letter);
+                    if (j == 4){
+                        boggleBoard.add(stringFinalBoggleBoard);
+                    }
+                }
             }
-        }
-        try{
-            return new ResponseEntity<BoggleBoard>(stringFinalBoggleBoard, HttpStatus.OK);
-        } catch (IOException e){
+            return new ResponseEntity<BoggleBoard>(boggleBoard, HttpStatus.OK);
+        } catch (IOException e) {
+            System.out.println(e);
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .build();
         }
     }
-
 }

@@ -4,3 +4,4 @@ build/
 **/vision-api-key.json
 **/*.log
 **/node_modules/*
+generated/

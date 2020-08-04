@@ -1,8 +1,7 @@
 package com.boggle;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import static com.boggle.WordPrefixCalculator.checkIsWordPrefix;
 
 public class TestWordPrefix {
 

@@ -11,8 +11,8 @@ public class BoggleWordGenerator {
         HashSet<String> finalWordSet = new HashSet<>();
         List<String> finalWordList = new ArrayList<>();
         List<String> wordsCreatedList = new ArrayList<>();
-        WordPrefixCalculator newWordPrefixCalculator = new WordPrefixCalculator("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
-        FullWordCalculator newFullWordCalculator = new FullWordCalculator("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
+        WordPrefixCalculator newWordPrefixCalculator = new WordPrefixCalculator("./boggle-lib/src/main/java/com/boggle/popularWords.txt");
+        FullWordCalculator newFullWordCalculator = new FullWordCalculator("./boggle-lib/src/main/java/com/boggle/popularWords.txt");
         for (int i = 0; i < 5; i++){
             for (int a = 0; a < 5; a++){
                 BoggleLetter newBogLetter = new BoggleLetter(i, a, board[i][a]);

@@ -38,7 +38,9 @@ public class BoggleBoardGenerator {
     }
 
     public static void main(String[] args) throws IOException {
-       // returnBoggleBoard("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/resources/IMG_0426.jpeg");
+        byte[] fileBytes = Files.readAllBytes(
+                Paths.get("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/resources/IMG_0426.jpeg"));
+        returnBoggleBoard(fileBytes);
     }
 
     public static Character[][] returnBoggleBoard(byte[] fileBytes) throws IOException {
@@ -106,8 +108,8 @@ public class BoggleBoardGenerator {
     }
 
     public static ImageSize calculateImageSize(byte[] fileBytes) throws IOException {
-            ByteArrayInputStream byteaArrayInputStream = new ByteArrayInputStream(fileBytes);
-            BufferedImage bimg = ImageIO.read(byteaArrayInputStream);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileBytes);
+            BufferedImage bimg = ImageIO.read(byteArrayInputStream);
             int width = bimg.getWidth();
             int height = bimg.getHeight();
             ImageSize imagesize = new ImageSize(height, width);

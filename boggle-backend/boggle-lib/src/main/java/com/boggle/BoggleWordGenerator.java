@@ -1,9 +1,7 @@
 package com.boggle;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashSet;
+import java.util.*;
 
 public class BoggleWordGenerator {
 
@@ -11,11 +9,12 @@ public class BoggleWordGenerator {
         HashSet<String> finalWordSet = new HashSet<>();
         List<String> finalWordList = new ArrayList<>();
         List<String> wordsCreatedList = new ArrayList<>();
-        FullWordCalculator newFullWordCalculator = new FullWordCalculator("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
+        Trie newTrie = Trie.createTrie("./boggle-lib/src/main/java/com/boggle/popularWords.txt");
+        FullWordCalculator newFullWordCalculator = new FullWordCalculator("./boggle-lib/src/main/java/com/boggle/popularWords.txt");
         for (int i = 0; i < 5; i++){
             for (int a = 0; a < 5; a++){
                 BoggleLetter newBogLetter = new BoggleLetter(i, a, board[i][a]);
-                wordsCreatedList = explore(newBogLetter, "", board, wordsCreatedList, newFullWordCalculator);
+                wordsCreatedList = explore(newBogLetter, "", board, wordsCreatedList, newFullWordCalculator, newTrie);
                 finalWordList.addAll(wordsCreatedList);
             }
         }
@@ -25,13 +24,13 @@ public class BoggleWordGenerator {
 
 
 
-    public static List<String> explore(BoggleLetter boggleLetter, String path, char board[][], List<String> wordsCreatedList, FullWordCalculator fullWordCalculator) {
+    public static List<String> explore(BoggleLetter boggleLetter, String path, char board[][], List<String> wordsCreatedList, FullWordCalculator fullWordCalculator, Trie newTrie) {
         // when i start, i explore the current letter
         path += boggleLetter.getVal();
         // figures out all the accessible options to the current letter
         List<BoggleLetter> lettersToExplore = boggleLetter.adjacentLetters(board);
         // checks if the word is a prefix
-        Boolean isPrefix = WordPrefixCalculator.checkIsWordPrefix(path);
+        Boolean isPrefix = newTrie.isPrefix(path);
         // checks if the word is a full word
         Boolean isWordFull = fullWordCalculator.checkIsWordFull(path);
 
@@ -40,7 +39,7 @@ public class BoggleWordGenerator {
         }
         if (isPrefix) {
             for (int i = 0; i < lettersToExplore.size(); i++) {
-                explore(lettersToExplore.get(i), path, board, wordsCreatedList, fullWordCalculator);
+                explore(lettersToExplore.get(i), path, board, wordsCreatedList, fullWordCalculator, newTrie);
             }
         }
         return wordsCreatedList;

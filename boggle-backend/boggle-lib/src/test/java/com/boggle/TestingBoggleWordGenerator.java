@@ -20,11 +20,12 @@ public class TestingBoggleWordGenerator {
                 {'f', 's', 'h', 'i', 'o'},
         };
         List<String> testList = new ArrayList<>();
+        Trie alphabetTrie = Trie.createTrie("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
         FullWordCalculator exploreTestFullWordCalculator = new FullWordCalculator("/Users/natashasinghvi/Documents/boggle/boggle-backend/boggle-lib/src/main/java/com/boggle/popularWords.txt");
         for (int i = 0; i < 5; i++){
             for (int a = 0; a < 5; a++){
                 BoggleLetter newBogLetter = new BoggleLetter(i,a, board[i][a]);
-                explore(newBogLetter, "", board, testList, exploreTestFullWordCalculator);
+                explore(newBogLetter, "", board, testList, exploreTestFullWordCalculator,alphabetTrie);
             }
         }
 

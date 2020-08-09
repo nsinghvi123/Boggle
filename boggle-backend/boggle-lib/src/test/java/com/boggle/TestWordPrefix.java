@@ -1,7 +1,7 @@
 package com.boggle;
+
 import org.junit.Assert;
 import org.junit.Test;
-
 
 public class TestWordPrefix {
 

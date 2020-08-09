@@ -34,8 +34,17 @@ swaggerSources {
             rawOptions = ["--ignore-file-override=" + file(".swagger-codegen-ignore").absolutePath]
         }
     }
+    boggleClient {
+        inputFile = file('../../boggle.yaml')
+        code {
+            language = 'typescript-fetch'
+            dependsOn validation
+            outputDir = file('../../boggle-frontend/src/generated/api')
+        }
+    }
 }
 
 compileJava.dependsOn swaggerSources.boggle.code
+compileJava.dependsOn swaggerSources.boggleClient.code
 sourceSets.main.java.srcDir "${swaggerSources.boggle.code.outputDir}/src/main/java"
 sourceSets.main.resources.srcDir "${swaggerSources.boggle.code.outputDir}/src/main/resources"

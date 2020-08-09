@@ -34,6 +34,24 @@ paths:
               type: string
         400:
           description: bad input parameter
+  /get-boggle-board:
+    post:
+      summary: takes in a file (picture of boggle board and returns a 2d array boggle board)
+      operationId: getBoggleBoard
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: imageFile
+          type: file
+          description: The file to upload.
+      responses:
+        200:
+          description: returns a boggle board
+          schema:
+            $ref: '#/definitions/BoggleBoard'
+        400:
+          description: bad input parameter
 definitions:
   BoggleBoard:
     type: array

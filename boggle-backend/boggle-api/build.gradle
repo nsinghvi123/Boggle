@@ -44,7 +44,22 @@ swaggerSources {
     }
 }
 
+tasks.register("writeApplicationDotProperties") {
+    doLast {
+        def props = project.file("build/resources/main/application.properties");
+        props.delete();
+        props << """server.port=8080
+spring.jackson.date-format=io.swagger.RFC3339DateFormat
+spring.jackson.serialization.WRITE_DATES_AS_TIMESTAMPS=false
+spring.servlet.multipart.max-file-size=50MB
+spring.servlet.multipart.max-request-size=50MB
+"""
+    }
+}
+
 compileJava.dependsOn swaggerSources.boggle.code
+compileJava.dependsOn tasks.getByName("writeApplicationDotProperties")
+tasks.getByName("writeApplicationDotProperties").shouldRunAfter processResources
 compileJava.dependsOn swaggerSources.boggleClient.code
 sourceSets.main.java.srcDir "${swaggerSources.boggle.code.outputDir}/src/main/java"
 sourceSets.main.resources.srcDir "${swaggerSources.boggle.code.outputDir}/src/main/resources"

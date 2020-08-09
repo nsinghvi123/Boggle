@@ -16,8 +16,9 @@ public class Tree {
         Node currentNode = root;
         for (int i = 1; i < word.length(); i++){
             char currentLetter = word.charAt(i);
-            currentNode.getChildren();
+            Map<Character,Node> treeMap = currentNode.getChildren();
             if (currentNode.childHasLetter(currentLetter) == true){
+                currentNode = treeMap.get(currentLetter);
                 continue;
             }
             else{

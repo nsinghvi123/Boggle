@@ -9,8 +9,6 @@ public class BoggleWordGenerator {
         HashSet<String> finalWordSet = new HashSet<>();
         List<String> finalWordList = new ArrayList<>();
         List<String> wordsCreatedList = new ArrayList<>();
-        // TODO: get rid of word prefix calculator?
-        WordPrefixCalculator newWordPrefixCalculator = new WordPrefixCalculator("./boggle-lib/src/main/java/com/boggle/popularWords.txt");
         Trie newTrie = Trie.createTrie("./boggle-lib/src/main/java/com/boggle/popularWords.txt");
         FullWordCalculator newFullWordCalculator = new FullWordCalculator("./boggle-lib/src/main/java/com/boggle/popularWords.txt");
         for (int i = 0; i < 5; i++){

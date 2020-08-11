@@ -1,8 +1,6 @@
 import React from 'react';
-import { Typography, Space } from 'antd';
-import {Popover, Button, SizeType } from 'antd';
-import 'antd/dist/antd.css';
-
+import { Typography } from 'antd';
+import {Popover, Button } from 'antd';
 
 const { Text, Link } = Typography;
 

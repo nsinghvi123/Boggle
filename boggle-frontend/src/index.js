@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import 'antd/dist/antd.css';
 import BoggleBoard from './BoggleBoard';
 import * as serviceWorker from './serviceWorker';
 

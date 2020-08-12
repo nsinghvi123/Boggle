@@ -1,63 +1,68 @@
-swagger: '2.0'
+openapi: 3.0.0
 info:
   description: This is a boggle solver API
-  version: 1.0.0
+  version: 1.0.0-oas3
   title: Boggle Solver API
-  # put the contact info for your development or API team
   contact:
     email: nsinghvi@umich.edu
-
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
-
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
   /solve-boggle:
     post:
-      summary: takes a picture and attempts to play boggle on the board
+      summary: returns the valid words for a 2d array representing a boggle board
       operationId: solveBoggle
-      produces:
-        - application/json
-      parameters:
-        - name: boggleBoard
-          in: body
-          description: "A 2d array representing boggle boards"
-          required: true
-          schema:
-            $ref: '#/definitions/BoggleBoard'
+      requestBody:
+        description: A 2d array represnting boggle boards
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BoggleBoard'
       responses:
-        200:
+        '200':
           description: search results matching criteria
-          schema:
-            type: array
-            items:
-              type: string
-        400:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
           description: bad input parameter
   /get-boggle-board:
     post:
-      summary: takes in a file (picture of boggle board and returns a 2d array boggle board)
+      summary: takes in a file (picture of boggle board and returns a 2d array boggle board
       operationId: getBoggleBoard
-      consumes:
-        - multipart/form-data
-      parameters:
-        - in: formData
-          name: imageFile
-          type: file
-          description: The file to upload.
+      requestBody: 
+        content: 
+          multipart/form-data:
+            schema: 
+              type: object
+              properties: 
+                fileName:
+                  type: string
+                  format: binary
       responses:
         200:
           description: returns a boggle board
-          schema:
-            $ref: '#/definitions/BoggleBoard'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoggleBoard'
         400:
           description: bad input parameter
-definitions:
-  BoggleBoard:
-    type: array
-    items:
+components:
+  schemas:
+    BoggleWord:
+      type: object
+      properties:
+        word:
+          type: string
+    BoggleBoard:
       type: array
       items:
-        type: string
-schemes:
-  - https
+        type: array
+        items:
+          type: string

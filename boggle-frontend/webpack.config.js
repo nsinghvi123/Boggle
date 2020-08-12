@@ -3,6 +3,9 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: ['./src/index.js', './src/index.less'],
+  resolve: {
+    extensions: ['.ts', '.js'] // add your other extensions here
+  },
   module: {
     rules: [
       {
@@ -54,6 +57,23 @@ module.exports = {
   },
   devServer: {
     contentBase: "./src",
-    hot: true
+    hot: true,
+    port: 9000,
+    proxy: {
+      '/solve-boggle': {
+         target: {
+            host: "localhost",
+            protocol: 'http:',
+            port: 8080
+         }
+      },
+      '/get-boggle-board': {
+        target: {
+           host: "localhost",
+           protocol: 'http:',
+           port: 8080
+        }
+     }
+   }
   }
 };

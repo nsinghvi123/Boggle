@@ -23,6 +23,7 @@
     "source-map-loader": "^1.0.1"
   },
   "scripts": {
+    "start-simple": "cp src/index.html public/index.html && react-scripts start",
     "start": "webpack-dev-server --open --mode development",
     "build": "react-scripts build"
   },

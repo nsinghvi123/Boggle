@@ -3,9 +3,12 @@ import BoggleLetter from './BoggleLetter';
 import { Button } from 'antd';
 import { Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-// import { DefaultApi } from './generated/'
+import { Configuration } from './swagger';
+import { DefaultApi } from './swagger';
 
-// const boggleApi = DefaultApi(undefined, fetch, "http://localhost:8080");
+const boggleApi = new DefaultApi(new Configuration({
+    basePath: "http://localhost:9000"
+}));
 
 class BoggleBoard extends React.Component {
 
@@ -42,11 +45,12 @@ class BoggleBoard extends React.Component {
                 )
                 }
             <div>
-                <Upload accept = 'jpeg/png' onChange={({file, fileList}) => this.fileUpload(file, fileList)}>
+                {/* <Upload accept = 'jpeg/png' onChange={({file, fileList}) => this.fileUpload(file, fileList)}>
                     <Button>
                         <UploadOutlined /> Click to Upload
                     </Button>
-               </Upload>
+               </Upload> */}
+               <input type="file" onChange={(event) => this.fileUpload(event)} /> 
                <Button type='primary' onClick={(event) => this.solve(event)}>Solve me!</Button>
             </div>          
             {
@@ -65,35 +69,30 @@ class BoggleBoard extends React.Component {
     }
 
     solve(event) {
-    //     console.log("solve me is called")
-    //     const configuration = {
-    //         basePath : "https://localhost:8080"
-    //     }
-    //    boggleApi.solveBoggle(this.state.board)
-    //    .then((result) => {
-    //        console.log(result);
-    //        this.setState( {
-    //            answerKey : result
-    //        })
-    //    })
+        console.log("solve me is called")
+        boggleApi.solveBoggle({
+            requestBody: this.state.board
+        })
+        .then((result) => {
+            console.log(result);
+            this.setState( {
+                answerKey : result
+            })
+        })
     }
 
-    fileUpload(file, fileList) {
-        // console.log("get boggle board is called")
-        // console.log(file)
-        // const configuration = {
-        //     basePath : "https://localhost:8080"
-        // }
-        // console.log(file.status)
-        // if (file.status === "done") {
-        //     boggleApi.getBoggleBoard(file.fileUpload)
-        //     .then((result) => {
-        //         console.log(result);
-        //         // this.setState({
-        //         //     board : result
-        //         // })
-        //     })
-        // }
+    fileUpload(event) {
+        console.log("get boggle board is called")
+        const file = event.target.files[0];
+        boggleApi.getBoggleBoard({
+            fileName: file
+        })
+        .then((result) => {
+            console.log(result);
+            this.setState({
+                board : result
+            })
+        })
     }
 }
 

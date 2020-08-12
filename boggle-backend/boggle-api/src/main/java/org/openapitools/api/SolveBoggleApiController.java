@@ -41,8 +41,14 @@ public class SolveBoggleApiController implements SolveBoggleApi {
             currentRowOfLetters = requestBody.get(a);
             for (int i = 0; i < currentRowOfLetters.size(); i++) {
                 String letter = currentRowOfLetters.get(i);
-                char finalLetter = letter.charAt(0);
-                finalBoggleBoard[a][i] = finalLetter;
+                if (letter.equalsIgnoreCase("null")){
+                    finalBoggleBoard[a][i] = '\0';
+                }
+                else {
+                    char finalLetter = letter.charAt(0);
+                    finalLetter = Character.toLowerCase(finalLetter);
+                    finalBoggleBoard[a][i] = finalLetter;
+                }
             }
         }
         BoggleWordGenerator newBoggleWordGenerator = new BoggleWordGenerator();

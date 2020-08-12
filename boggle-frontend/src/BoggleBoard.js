@@ -1,7 +1,7 @@
 import React from 'react';
 import BoggleLetter from './BoggleLetter';
 import { Button } from 'antd';
-import { Upload, message } from 'antd';
+import { Upload, message, Typography } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { Configuration } from './swagger';
 import { DefaultApi } from './swagger';
@@ -30,7 +30,7 @@ class BoggleBoard extends React.Component {
 
 
     render() {
-        return(
+        return( 
             <div id="board">
                 {
                 this.state.board.map((row, i) => 

@@ -13,6 +13,11 @@ public class FullWordCalculator {
     private Set<String> dictionary = new HashSet<>();
     public FullWordCalculator(String fileName) throws IOException {
         List<String> allWords = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+        for (int i = 0; i < allWords.size(); i++){
+            if (allWords.get(i).length() < 3){
+                allWords.remove(i);
+            }
+        }
         this.dictionary = new HashSet<>(allWords);
     }
 

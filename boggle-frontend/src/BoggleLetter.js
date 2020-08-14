@@ -15,7 +15,7 @@ class BoggleLetter extends React.Component {
     render() {
         return(  
         <span>
-            <Popover title="Please change letter:"
+            <Popover title="Please change letter:" 
                 content={
                     <form>
                         <input
@@ -25,7 +25,7 @@ class BoggleLetter extends React.Component {
                         />
                     </form>
                 }>
-                <Button type = "primary" className="big-btn" style={{ background: "turquoise", borderColor: "white", color: "white", fontSize: '20px'}}>{this.props.letter}             
+                <Button type = "primary" className="big-btn" style={{ background: "white", borderColor: "#ffa940", color: "#ffa940", fontSize: '20px'}}>{this.props.letter}             
                 </Button>
             </Popover>       
         </span>    

@@ -16,10 +16,11 @@
     "babel-preset-react": "^6.24.1",
     "es6-promise": "^4.2.8",
     "import-loader": "^1.0.1",
+    "particles-bg": "^2.5.0",
     "portable-fetch": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.2",
+    "react-scripts": "^3.4.3",
     "source-map-loader": "^1.0.1"
   },
   "scripts": {

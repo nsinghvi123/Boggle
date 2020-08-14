@@ -13,9 +13,11 @@ public class BoggleWordGenerator {
         FullWordCalculator newFullWordCalculator = new FullWordCalculator("./boggle-lib/src/main/java/com/boggle/popularWords.txt");
         for (int i = 0; i < 5; i++){
             for (int a = 0; a < 5; a++){
-                BoggleLetter newBogLetter = new BoggleLetter(i, a, board[i][a]);
-                wordsCreatedList = explore(newBogLetter, "", board, wordsCreatedList, newFullWordCalculator, newTrie);
-                finalWordList.addAll(wordsCreatedList);
+                if (board[i][a] != '\0'){
+                    BoggleLetter newBogLetter = new BoggleLetter(i, a, board[i][a]);
+                    wordsCreatedList = explore(newBogLetter, "", board, wordsCreatedList, newFullWordCalculator, newTrie);
+                    finalWordList.addAll(wordsCreatedList);
+                }
             }
         }
         finalWordSet.addAll(finalWordList);

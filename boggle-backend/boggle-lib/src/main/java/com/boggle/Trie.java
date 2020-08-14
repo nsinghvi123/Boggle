@@ -35,6 +35,11 @@ public class Trie {
     public static Trie createTrie(String fileName) throws IOException {
         Map<Character,Tree> alphabetMap = new HashMap<>();
         List<String> words = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+        for (int i = 0; i < words.size(); i++){
+            if (words.get(i).length() < 3){
+                words.remove(i);
+            }
+        }
         for (int i = 0; i < words.size(); i++) {
             if (!alphabetMap.containsKey(words.get(i).charAt(0))) {
                 Tree newTree = new Tree();

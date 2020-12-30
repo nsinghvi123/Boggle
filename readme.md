@@ -9,3 +9,5 @@ Built with Java, React, Ant Design, JavaScript, and Swagger Open API.
 
 ## How it Works
 ![](Images/boggleSolver.png)
+
+I created a Boggle Solver webpage, where users can click the "Upload" button to upload an image of their Boggle Board. Once, they upload an image of their Boggle Boad, the board on the site (as seen in the picture above) will change to look like the image uploaded. If there are "null" characters, the user can manually add those letters in, otherwise, the user can hit the "Solve" button to view a list of word solutions! 

@@ -8,6 +8,4 @@ When looking up Boggle Solver websites, users had to manually enter each letter 
 Built with Java, React, Ant Design, JavaScript, and Swagger Open API. 
 
 ## How it Works
-
-
- 
+![](boggleSolverImages/Screen%20Shot%202020-12-30%20at%2012.52.50%20PM.png)
